@@ -30,15 +30,15 @@ var server = http.createServer(function(request, response){
     '<script src="/main.js"></script>' +
     '</body></html>')
     response.end()
-  }else if(path == '/style.css'){
+  }else if(path == '/style'){
     //css
     response.setHeader('Content-Type', 'text/css; charset=utf-8')
-    response.write('你打开了style.css')
+    response.write('你打开了style')
     response.end()
-  }else if(path == '/main.js'){
+  }else if(path == '/script'){
     //js
     response.setHeader('Content-Type', 'text/javascript; charset=utf-8')
-    response.write('你打开了main.js')
+    response.write('你打开了script')
     response.end()
   }else{
     response.statusCode = 404
