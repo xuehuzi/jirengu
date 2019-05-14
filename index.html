@@ -5,12 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>导航练习</title>
+    <script src="//at.alicdn.com/t/font_1191386_1d4khruylrx.js"></script>
+    <title>简历练习</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
         body {
             margin: 0;
-            background: black;
-            color: white;
+            background: #efefef;
         }
 
         a {
@@ -24,45 +37,52 @@
             clear: both;
         }
 
-        .top-nav {
-            padding: 20px 16px 20px 16px;
+        .top_nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%
         }
 
-        .top-nav>.logo {
+        .top_nav_inner {
+            padding: 20px 16px;
+        }
+
+        .top_nav .logo {
             float: left;
             font-size: 24px;
             font-family: 'Arial Black';
             padding: 3px 0 4px 0;
         }
 
-        .top-nav>.logo>.rs {
+        .top_nav .logo .rs {
             margin-right: 4px;
             color: #e6686a;
         }
 
-        .top-nav>.logo>.card {
+        .top_nav .logo .card {
             color: #9a9da2;
         }
 
 
-        .top-nav>nav {
+        .top_nav nav {
             float: right;
             padding: 7px 0 0 0;
         }
 
-        .top-nav>nav>ul {
+        .top_nav nav>ul {
             list-style: none;
             margin: 0;
             padding: 0;
         }
 
 
-        .top-nav>nav>ul>li {
+        .top_nav nav>ul>li {
             float: left;
             margin: 0 17px 0 17px;
         }
 
-        .top-nav>nav>ul>li>a {
+        .top_nav nav>ul>li>a {
             font-size: 12px;
             color: #b7b7b7;
             font-weight: bold;
@@ -71,84 +91,188 @@
             padding: 5px 0;
             display: block;
         }
+
+        .banner {
+            height: 515px;
+            background-image: url(./img/rs-cover.jpg);
+            background-position: center center;
+            background-size: cover;
+        }
+
+        .banner .mask {
+            background-color: rgba(0, 0, 0, 0.8);
+            height: 515px;
+        }
+
+        .user_card {
+            max-width: 940px;
+            margin: 0 auto;
+            background: white;
+            color: #000;
+        }
+
+        .user_card_PicAndTxt {
+            padding: 50px;
+        }
+
+        .user_card_PicAndTxt>.user_pic {
+            float: left;
+            margin-right: 65px;
+        }
+
+        .welcome {
+            background: #e6686a;
+            padding: 4px 16px;
+            color: white;
+            position: relative;
+            /*  */
+            display: inline-block;
+            line-height: 22px;
+            margin-bottom: 10px;
+        }
+
+        .welcome::before {
+            content: '';
+            height: 0;
+            width: 0;
+            position: absolute;
+            display: block;
+            top: 100%;
+            left: 4px;
+            border: 10px solid transparent;
+            border-left: 10px solid #e6686a;
+            border-top-width: 0;
+        }
+
+        .user_card_PicAndTxt>.user_txt {
+            float: left;
+            width: 470px;
+        }
+
+        .user_txt h1 {
+            margin-top: 18px;
+        }
+
+        .user_txt hr {
+            margin: 20px 0;
+        }
+
+        .user_txt dl dt {
+            width: 30%;
+            font-weight: bold;
+            float: left;
+            padding: 5px 0;
+        }
+
+        .user_txt dl dd {
+            width: 70%;
+            padding: 5px 0;
+            color: #9da0a7;
+        }
+
+        .user_card_footer {
+            background: #E6686A;
+            text-align: center;
+        }
+
+        .user_card_footer a {
+            margin: 16px;
+            display: inline-block;
+            border-radius: 50%;
+            /* height: 40px; */
+            width: 40px;
+            line-height: 30px;
+            padding: 5px 0;
+        }
+
+        .user_card_footer a:hover{
+            background: #CF5D5F;
+        }
+
+        .user_card_footer svg {
+            height: 30px;
+            width: 30px;
+            vertical-align: top;
+            fill: white;
+        }
     </style>
 </head>
 
 <body>
-    <div class="top-nav clearfix">
-        <a class="logo" href="#" alt='logo'>
-            <span class="rs">RS</span><span class="card">card</span>
-            <!-- 知识点：两个相连的span标签换行和不换行是有空格区别，浏览器在换行的span标签默认加一个空格 -->
-        </a>
-        <nav>
-            <ul class="clearfix">
-                <li><a href="#">关于</a></li>
-                <li><a href="#">技能</a></li>
-                <li><a href="#">作品</a></li>
-                <li><a href="#">博客</a></li>
-                <li><a href="#">日历</a></li>
-                <li><a href="#">联系方式</a></li>
-                <li><a href="#">其他</a></li>
-            </ul>
-        </nav>
+    <div class="top_nav">
+        <div class="top_nav_inner clearfix">
+            <a class="logo" href="#" alt='logo'>
+                <span class="rs">RS</span>
+                <span class="card">card</span>
+                <!-- 知识点：两个相连的span标签换行和不换行是有空格区别，浏览器在换行的span标签默认加一个空格 -->
+            </a>
+            <nav>
+                <ul class="clearfix">
+                    <li><a href="#">关于</a></li>
+                    <li><a href="#">技能</a></li>
+                    <li><a href="#">作品</a></li>
+                    <li><a href="#">博客</a></li>
+                    <li><a href="#">日历</a></li>
+                    <li><a href="#">联系方式</a></li>
+                    <li><a href="#">其他</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="banner">
+        <div class="mask"></div>
     </div>
     <main>
-        <div>
-            <div>
-                <div>
-                    <img src="" alt="头像">
+        <div class="user_card">
+            <div class="user_card_PicAndTxt clearfix">
+                <div class="user_pic">
+                    <img src="./img/avatar.jpg" alt="头像">
                 </div>
-                <div>
-                    <div>
-                        <span>Hello</span>
-                        <h1>系统班学生</h1>
-                        <p>前端开发工程师</p>
-                        <hr>
-                        <dl>
-                            <dt>年龄</dt>
-                            <dd>99</dd>
-                            <dt>所在城市</dt>
-                            <dd>北京</dd>
-                            <dt>邮箱</dt>
-                            <dd>xxxx@163.com</dd>
-                            <dt>手机</dt>
-                            <dd>13812345678</dd>
-                        </dl>
-                    </div>
+                <div class="user_txt">
+                    <span class="welcome">Hello</span>
+                    <h1>系统班学生</h1>
+                    <p>前端开发工程师</p>
+                    <hr>
+                    <dl>
+                        <dt>年龄</dt>
+                        <dd>99</dd>
+                        <dt>所在城市</dt>
+                        <dd>北京</dd>
+                        <dt>邮箱</dt>
+                        <dd>xxxx@163.com</dd>
+                        <dt>手机</dt>
+                        <dd>13812345678</dd>
+                    </dl>
                 </div>
             </div>
-            <footer>
+            <footer class="user_card_footer">
                 <a href="#">
-                    <img src="#" alt="...">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-weixin"></use>
+                    </svg>
                 </a>
                 <a href="#">
-                    <img src="#" alt="...">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
                 </a>
                 <a href="#">
-                    <img src="#" alt="...">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-weibo-copy"></use>
+                    </svg>
                 </a>
                 <a href="#">
-                    <img src="#" alt="...">
-                </a>
-                <a href="#">
-                    <img src="#" alt="...">
-                </a>
-                <a href="#">
-                    <img src="#" alt="...">
-                </a>
-                <a href="#">
-                    <img src="#" alt="...">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
                 </a>
             </footer>
         </div>
-
         <a href="#">下载 PDF 简历</a>
-
         <p>
             饥人谷前端系统班1904B，学生练习作品。
             <br> 技能：前端开发，Rails 开发，Node.js 开发
         </p>
-
     </main>
     <section>
         <h2>技能</h2>
@@ -178,7 +302,7 @@
         </div>
 
     </section>
-    
+
 </body>
 
 </html>
