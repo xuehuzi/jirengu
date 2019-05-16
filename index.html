@@ -109,6 +109,7 @@
             margin: 0 auto;
             background: white;
             color: #000;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
         }
 
         .user_card_PicAndTxt {
@@ -151,6 +152,7 @@
 
         .user_txt h1 {
             margin-top: 18px;
+            font-weight: normal;
         }
 
         .user_txt hr {
@@ -185,7 +187,7 @@
             padding: 5px 0;
         }
 
-        .user_card_footer a:hover{
+        .user_card_footer a:hover {
             background: #CF5D5F;
         }
 
@@ -194,6 +196,206 @@
             width: 30px;
             vertical-align: top;
             fill: white;
+        }
+
+        .main {
+            margin-top: -340px;
+            margin-bottom: 64px;
+        }
+
+        .download_center {
+            text-align: center;
+            margin: 32px 0;
+        }
+
+        .download {
+            padding: 20px 55px;
+            border: 1px solid #cdcfd1;
+            border-radius: 3px;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .download:hover {
+            box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+            transition: box-shadow 0.3s;
+        }
+
+        .self_introduction {
+            margin: 0 auto;
+            text-align: center;
+            /* border: 1px solid rebeccapurple; */
+            max-width: 940px;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .self_skills {
+            /* border: 1px solid rebeccapurple; */
+            max-width: 940px;
+            margin: 0 auto;
+        }
+
+        .self_skills>h2 {
+            text-align: center;
+            color: #3d4451;
+            font-size: 34px;
+            line-height: 1.2;
+            font-weight: 600;
+        }
+
+        .self_skills>ol {
+            background: white;
+            padding: 10px 50px 50px 50px;
+            margin-top: 30px;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+        }
+
+
+        .self_skills>ol>li {
+            list-style: none;
+            float: left;
+            width: 48%;
+            margin-top: 38px
+        }
+
+        .self_skills>ol>li>h3 {
+            font-size: 14px;
+            line-height: 1.1;
+            font-weight: normal;
+        }
+
+        .self_skills>ol>li:nth-child(even) {
+            /* border: 1px solid cadetblue; */
+            float: right;
+        }
+
+        .skill_bar {
+            height: 5px;
+            /* border: 1px solid green; */
+            background: #FAE1E1;
+            border-radius: 2px;
+            margin-top: 4px;
+        }
+
+        .skill_bar::before {
+            content: "";
+            background: #E6686A;
+            width: 50%;
+            height: 100%;
+            float: left;
+            border-radius: 2px;
+        }
+
+        .self_skills>ol>li:nth-child(1)>div::before {
+            width: 10%;
+        }
+
+        .self_skills>ol>li:nth-child(2)>div::before {
+            width: 20%;
+        }
+
+        .self_skills>ol>li:nth-child(3)>div::before {
+            width: 30%;
+        }
+
+        .self_skills>ol>li:nth-child(4)>div::before {
+            width: 40%;
+        }
+
+        .self_skills>ol>li:nth-child(5)>div::before {
+            width: 50%;
+        }
+
+        .self_skills>ol>li:nth-child(6)>div::before {
+            width: 60%;
+        }
+
+        .works {
+            /* border: 1px solid red; */
+            max-width: 940px;
+            margin: 0 auto;
+            margin-top: 64px;
+            margin-bottom: 100px;
+            text-align: center;
+        }
+
+        .works>h2 {
+            color: #3d4451;
+            font-size: 34px;
+            line-height: 1.2;
+            font-weight: 600;
+        }
+
+        .works>nav {
+            /* border: 1px solid red; */
+            display: inline-block;
+            margin-top: 32px;
+        }
+
+        .works>nav>ol>li {
+            list-style: none;
+            float: left;
+            margin-left: 40px;
+            cursor: pointer;
+        }
+
+        .works>nav>ol>li:first-child {
+            margin-left: 0;
+        }
+
+        .works_bar {
+            /* border: 1px solid blue; */
+            height: 5px;
+            background: white;
+            margin-top: 5px;
+            margin-bottom: 28px;
+            border-radius: 2px;
+        }
+
+        .works_bar_inner {
+            height: 100%;
+            background: #E6686A;
+            border-radius: 2px;
+            width: 50px;
+            transition: all 0.3s;
+        }
+
+        .works_bar_inner2 {
+            height: 100%;
+            background: #E6686A;
+            border-radius: 2px;
+            margin-left: 65px;
+            width: 50px;
+            transition: all 0.3s;
+        }
+
+        .works_bar_inner3 {
+            height: 100%;
+            background: #E6686A;
+            border-radius: 2px;
+            margin-left: 140px;
+            width: 95px;
+            transition: all 0.3s;
+        }
+
+        .works_list {
+            /* border: 1px solid royalblue; */
+            height: 597px;
+            position: relative;
+        }
+
+        .works_list>div{
+            float: left;
+            position: absolute;
+        }
+
+        .works_list>div:nth-child(n+2) {
+            left: 645px;
+        }
+        .works_list>div:nth-child(3) {
+            top: 312px
         }
     </style>
 </head>
@@ -222,7 +424,7 @@
     <div class="banner">
         <div class="mask"></div>
     </div>
-    <main>
+    <main class="main">
         <div class="user_card">
             <div class="user_card_PicAndTxt clearfix">
                 <div class="user_pic">
@@ -268,41 +470,93 @@
                 </a>
             </footer>
         </div>
-        <a href="#">下载 PDF 简历</a>
-        <p>
-            饥人谷前端系统班1904B，学生练习作品。
+        <p class="download_center">
+            <a class="download" href="./img/rs-cover.jpg" target="_blank" download="">下载 PDF 简历</a>
+        </p>
+
+        <p class="self_introduction">
+            饥人谷前端系统班1904B学生练习作品，授课老师方方。
             <br> 技能：前端开发，Rails 开发，Node.js 开发
         </p>
     </main>
-    <section>
+    <section class="self_skills">
         <h2>技能</h2>
-        <ol>
-            <li>HTML 5 &amp; CSS 3</li>
-            <li>JavaScript</li>
-            <li>jQuery</li>
-            <li>Vue</li>
-            <li>React</li>
-            <li>HTTP</li>
+        <ol class="clearfix">
+            <li>
+                <h3>HTML 5 &amp; CSS 3</h3>
+                <div class="skill_bar skill_bar1">
+
+                </div>
+            </li>
+            <li>
+                <h3>JavaScript</h3>
+                <div class="skill_bar">
+
+                </div>
+            </li>
+            <li>
+                <h3>jQuery</h3>
+                <div class="skill_bar">
+
+                </div>
+            </li>
+            <li>
+                <h3>Vue</h3>
+                <div class="skill_bar">
+
+                </div>
+            </li>
+            <li>
+                <h3>React</h3>
+                <div class="skill_bar">
+
+                </div>
+            </li>
+            <li>
+                <h3>HTTP</h3>
+                <div class="skill_bar">
+
+                </div>
+            </li>
         </ol>
     </section>
-    <section>
+    <section class="works">
         <h2>作品集</h2>
         <nav>
-            <ol>
-                <li>所有</li>
-                <li>框架</li>
-                <li>原生JS&amp;CSS</li>
+            <ol class="clearfix">
+                <li id="works_bar1">所有</li>
+                <li id="works_bar2">框架</li>
+                <li id="works_bar3">原生JS&amp;CSS</li>
             </ol>
+            <div class="works_bar">
+                <div id="works_bar_inner" class="works_bar_inner"></div>
+            </div>
         </nav>
-
-        <div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <script>
+            works_bar1.onclick = function () {
+                works_bar_inner.className = 'works_bar_inner'
+            }
+            works_bar2.onclick = function () {
+                works_bar_inner.className = 'works_bar_inner2'
+            }
+            works_bar3.onclick = function () {
+                works_bar_inner.className = 'works_bar_inner3'
+            }
+        </script>
+        <div class="works_list clearfix">
+            <div>
+                <img src="./img/1.jpg" alt="作品1">
+            </div>
+            <div>
+                <img src="./img/2.jpg" alt="作品2">
+            </div>
+            <div>
+                <img src="./img/3.jpg" alt="作品3">
+            </div>
         </div>
-
     </section>
 
 </body>
+
 
 </html>
