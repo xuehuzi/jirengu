@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>keyboardNav</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: url(./img/bg.png);
+            background-color: #ddd;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #kbd_father {
+            text-align: center;
+        }
+
+        #kbd_father div {
+            margin-bottom: 15px;
+        }
+
+        #kbd_father kbd {
+            /* border: 1px solid red; */
+            display: inline-block;
+            text-transform: uppercase;
+            margin-left: 15px;
+            width: 70px;
+            height: 60px;
+            cursor: pointer;
+            font-family: keyboard, "Arial Rounded", Helvetica, Arial, sans-serif;
+            font-size: 24px;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+            background-color: #000;
+            color: #fff;
+            /*  */
+            border-radius: 8px;
+            position: relative;
+            line-height: 60px;
+            user-select: none;
+        }
+
+        #kbd_father div>kbd>button {
+            display: none;
+            position: absolute;
+            right: 5px;
+            bottom: 2px;
+            color: white;
+            background: transparent;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #kbd_father div>kbd>button:hover {
+            color: orange;
+
+        }
+
+        #kbd_father>div>kbd:hover>button {
+            display: inline-block;
+        }
+
+        #kbd_father div:nth-child(3) {
+            margin-left: -2em;
+        }
+
+        #kbd_father div:nth-child(4) {
+            margin-left: -8em;
+        }
+
+        .imgclassname {
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            border-radius: 10px;
+            left: 5px;
+            bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div id="kbd_father">
+
+        </div>
+    </main>
+    <script>
+        var kbd_father = document.getElementById('kbd_father');
+        var keys = {
+            '0': { 0: '1', 1: '2', 2: '3', 3: '4', 4: '5', 5: '6', 6: '7', 7: '8', 8: '9', 9: '10', length: 10 },
+            '1': { 0: 'q', 1: 'w', 2: 'e', 3: 'r', 4: 't', 5: 'y', 6: 'u', 7: 'i', 8: 'o', 9: 'p', length: 10 },
+            '2': { 0: 'a', 1: 's', 2: 'd', 3: 'f', 4: 'g', 5: 'h', 6: 'j', 7: 'k', 8: 'l', length: 9 },
+            '3': { 0: 'z', 1: 'x', 2: 'c', 3: 'v', 4: 'b', 5: 'n', 6: 'm', length: 7 },
+            'length': 4
+        };
+        var hash = {
+            'q': 'www.qq.com',
+            'w': 'www.weibo.com',
+            'e': 'ele.me',
+            'r': 'www.renren.com',
+            't': 'tianya.com',
+            'y': 'youtube.com',
+            'u': 'u-com.cn',
+            'i': 'iqiyi.com',
+            'o': 'opera.com',
+            'p': 'pro.25pp.com',
+            'a': 'alibaba.com',
+            's': 'sohu.com',
+
+            'z': 'zhihu.com',
+            'm': 'www.mcdonalds.com.cn'
+        };
+
+        var hashHistory = JSON.parse(localStorage.getItem('readHash' || 'null'));
+
+        if (hashHistory) {
+            hash = hashHistory;
+        }
+
+        for (i = 0; i < keys['length']; i++) {
+            var kbd_div = document.createElement('div');
+            kbd_father.appendChild(kbd_div);
+            for (j = 0; j < keys[i]['length']; j++) {
+                var kbd = document.createElement('kbd');
+                var kbd_span = document.createElement('span')
+                var kbd_button = document.createElement('button');
+                var kbd_img = document.createElement('img');
+                kbd_div.appendChild(kbd);
+                kbd.appendChild(kbd_span);
+                kbd.appendChild(kbd_button);
+                kbd.appendChild(kbd_img);
+                kbd_img.className = 'imgclassname';
+                kbd_button.textContent = 'E';
+                kbd_span.textContent = keys[i][j];
+
+
+                if (hash[keys[i][j]]) {
+                    kbd_img.src = 'http://' + hash[keys[i][j]] + '/favicon.ico';
+                }
+                else {
+                    kbd_img.src = './img/dian.png';
+                }
+
+                kbd_img.onerror = function (errmsg) {
+                    errmsg.target.src = './img/dian.png';
+                }
+
+                kbd_button.onclick = function (src) {//监听点击事件
+                    //console.log(src.target.previousSibling.textContent)
+                    var newsrc = src.target.previousSibling.textContent;
+                    var sitsrc = window.prompt();
+                    hash[newsrc] = sitsrc;
+                    localStorage.setItem('readHash', JSON.stringify(hash));
+                }
+            }
+        }
+
+        document.onkeypress = function (keyboard_value) {//监听键盘事件
+            //console.log(keyboard_value.key);
+            var keyboard_value = keyboard_value.key;//获取键盘按下的具体按钮
+            var sit_value = hash[keyboard_value];//通过具体按键值再hash拿到对应的网址
+            window.open('http://' + sit_value, '_blank');
+        }
+
+    </script>
+</body>
+
+</html>

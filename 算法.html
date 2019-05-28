@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>算法</title>
+</head>
+
+<body>
+    <script>
+        var arr = [9, 3, 8, 2, 6, 1, 7, 5];
+        var changeval;
+        for (i = 0; i < arr.length; i++) {//判断轮数
+            for (j = 0; j < arr.length - 1; j++) {//判断比较次数，比较次数由数组长度-1
+                if (arr[j] > arr[j + 1]) {//判断每轮相邻两个数大小，<和>分别对应从大到小排序
+                    changeval = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = changeval;
+                }
+            }
+            console.log(arr)
+        }
+
+    </script>
+</body>
+
+</html>
