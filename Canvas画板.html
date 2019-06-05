@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport"
+      content="width=device-width, initial-scale=1.0 user-scalable=no,initial-scale=1.0,maximum-scale=1">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Canvas 画板</title>
+   <style>
+      * {
+         margin: 0;
+         padding: 0;
+      }
+
+      body {
+         overflow: hidden;
+      }
+
+      canvas {
+         background: aliceblue;
+      }
+
+      .select {
+         position: fixed;
+         background: slategray;
+      }
+
+      .imgpic {
+         float: left;
+      }
+
+      .penandcolor {
+         float: right;
+      }
+
+      .imgpic>img {
+
+         padding: 10px;
+      }
+
+      .penandcolor>ul {
+         float: right;
+         padding: 10px;
+      }
+
+      .penandcolor>ul>li {
+         width: 20px;
+         height: 20px;
+         list-style: none;
+         float: right;
+         margin-right: 15px;
+      }
+
+
+
+      .color_list>li:nth-child(1) {
+         background: black;
+      }
+
+      .color_list>li:nth-child(2) {
+         background: red;
+      }
+
+      .color_list>li:nth-child(3) {
+         background: gold;
+      }
+
+      .pen_list>li {
+         background: black;
+         border-radius: 50%;
+      }
+
+      .pen_list>li:nth-child(1) {
+         width: 10px;
+         height: 10px;
+
+      }
+
+      .pen_list>li:nth-child(2) {
+         width: 15px;
+         height: 15px;
+      }
+
+      .pen_list>li:nth-child(3) {
+         width: 20px;
+         height: 20px;
+      }
+   </style>
+</head>
+
+<body>
+   <div class="select">
+      <div class="imgpic">
+         <img id="eraser" src="./img/xiangpi1.png" alt="橡皮擦" width="30px" height="30px">
+         <img id="delet" src="./img/delt.png" alt="删除" width="30px" height="30px">
+         <img id="download" src="./img/download.png" alt="下载" width="30px" height="30px">
+      </div>
+      <div class="penandcolor">
+         <ul class="color_list">
+            <li id="black" class="black brush_color"></li>
+            <li id="red" class="red brush_color"></li>
+            <li id="gold" class="gold brush_color"></li>
+         </ul>
+         <ul class="pen_list">
+            <li id="pen_one" class="thickness"></li>
+            <li id="pen_two" class="thickness"></li>
+            <li id="pen_three" class="thickness"></li>
+         </ul>
+      </div>
+   </div>
+   <canvas id="my_canvas"></canvas>
+
+
+   <script>
+      var brush_color = document.getElementsByClassName('brush_color');
+      var thickness = document.getElementsByClassName('thickness');
+      var change_color = undefined;
+      var my_canvas = document.getElementById('my_canvas');
+      var my_graphics = my_canvas.getContext('2d');
+      var draw_flg = false;
+      //var eraser = document.getElementById('eraser');
+      var eraser_flg = false;
+      var coordinate = {
+         'x': undefined,
+         'y': undefined
+      }
+      var pen_width = {
+         'pen_one': 5,
+         'pen_two': 10,
+         'pen_three': 15
+      }
+      var pen_flg = undefined;
+
+      window.onresize = function () {//设置canvas画布尺寸随窗口可视尺寸变化
+         setcanvas()
+      }
+
+      setcanvas();
+
+      function setcanvas() {////设置一开始canvas画布尺寸
+         var canvas_size_width = document.documentElement.clientWidth;
+         var canvas_size_height = document.documentElement.clientHeight;
+         my_canvas.width = canvas_size_width;
+         my_canvas.height = canvas_size_height;
+      }
+
+      pen_flg = pen_width['pen_one'];//设置默认笔触宽度
+
+      pen_one.onclick = function () {
+         pen_flg = pen_width['pen_one'];
+         eraser_flg = false;
+         eraser_img();
+         // console.log(pen_flg = pen_width['one'])
+      }
+
+      pen_two.onclick = function () {
+         eraser_flg = false;
+         eraser_img();
+         pen_flg = pen_width['pen_two'];
+      }
+
+      pen_three.onclick = function () {
+         eraser_flg = false;
+         eraser_img();
+         pen_flg = pen_width['pen_three'];
+      }
+
+      for (var i = 0; i < brush_color.length; i++) {//设置笔触颜色
+         brush_color[i].index = i;
+         brush_color[i].onclick = function () {
+            change_color = brush_color[this.index].id;
+            eraser_flg = false;
+            eraser_img();
+         }
+      }
+
+      function draw(x, y, radius) {//设置笔触
+         my_graphics.beginPath();
+         my_graphics.arc(x, y, radius, 0, Math.PI * 2);
+         my_graphics.fillStyle = change_color//填充颜色
+         my_graphics.fill();
+      }
+
+      function draw_line(x1, y1, x2, y2) {//设置连线
+         my_graphics.beginPath();
+         my_graphics.lineWidth = pen_flg;//连接线宽度
+         my_graphics.moveTo(x1, y1);//连线起点坐标
+         my_graphics.lineTo(x2, y2);//连线终点坐标
+         my_graphics.strokeStyle = change_color//连线颜色
+         my_graphics.closePath();
+         my_graphics.stroke();
+      }
+      //ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+      // 圆弧中心（圆心）的 x 轴坐标。
+      // 圆弧中心（圆心）的 y 轴坐标。
+      // radius圆弧的半径。
+      // startAngle圆弧的起始点， x轴方向开始计算，单位以弧度表示。
+      // endAngle圆弧的终点， 单位以弧度表示。
+      // anticlockwise可选的Boolean值 ，如果为 true，逆时针绘制圆弧，反之，顺时针绘制。
+
+      function eraser_img() {//设置橡皮擦不同状态图片
+         if (eraser_flg === true) {
+            eraser.src = './img/' + 'xiangpi.png';
+         } else {
+            eraser.src = './img/' + 'xiangpi1.png'
+         }
+      }
+
+      eraser.onclick = function () {
+         eraser_flg = true;
+         draw_flg = false;
+         eraser_img()
+      }
+
+      delet.onclick = function () {//删除
+         my_graphics.clearRect(0, 0, my_canvas.width, my_canvas.height);
+      }
+
+      download.onclick = function () {
+         var new_url = my_canvas.toDataURL('img/png');
+         var a = document.createElement('a');
+         document.body.appendChild(a);
+         a.href = new_url;
+         a.download = '我的画';
+         a.click();
+         console.log(new_url)
+      }
+
+      if (document.body.ontouchstart !== undefined) {//特性检测
+         //触屏设备
+         my_canvas.ontouchstart = function (target) {//触屏点击
+            var target_x = target.touches[0].clientX;
+            var target_y = target.touches[0].clientY;
+            draw_flg = true;
+            if (eraser_flg) {
+               my_graphics.clearRect(target_x, target_y, 20, 20);
+            } else {
+               coordinate = {
+                  'x': target_x,
+                  'y': target_y
+               }
+               draw(target_x, target_y, pen_width);
+            }
+            //console.log(target.touches[0].clientX)
+         }
+         my_canvas.ontouchmove = function (target) {//触屏滑动
+            var target_x = target.touches[0].clientX;
+            var target_y = target.touches[0].clientY;
+            var new_coordinate = {
+               'x': target_x,
+               'y': target_y
+            }
+            if (!draw_flg) {
+               return;
+            }
+            if (eraser_flg) {
+               my_graphics.clearRect(target_x, target_y, 20, 20);
+            } else {
+               draw(target_x, target_y, pen_width);
+               draw_line(coordinate.x, coordinate.y, new_coordinate.x, new_coordinate.y);
+               coordinate = new_coordinate;
+            }
+         }
+         my_canvas.ontouchend = function () {
+            draw_flg = false;
+         }
+      } else {
+         //非触屏设备
+         my_canvas.onmousedown = function (target) {//按下
+            var target_x = target.clientX;
+            var target_y = target.clientY;
+            draw_flg = true;
+            if (eraser_flg) {
+               my_graphics.clearRect(target_x, target_y, 5, 5);
+            } else {
+               coordinate = {
+                  'x': target_x,
+                  'y': target_y
+               }
+               draw(target_x, target_y, pen_width);
+            }
+         }
+         my_canvas.onmousemove = function (target) {//鼠标移动
+            var target_x = target.clientX;
+            var target_y = target.clientY;
+            var new_coordinate = {
+               'x': target_x,
+               'y': target_y
+            }
+            if (!draw_flg) {//是否在画
+               return;
+            }
+            if (eraser_flg) {
+               my_graphics.clearRect(target_x, target_y, 20, 20);
+            } else {
+               console.log(eraser_flg)
+               draw(target_x, target_y, pen_width);
+               draw_line(coordinate.x, coordinate.y, new_coordinate.x, new_coordinate.y);//*****
+               coordinate = new_coordinate;//*****
+            }
+         }
+         my_canvas.onmouseup = function () {//鼠标松开
+            draw_flg = false;
+         }
+      }
+   </script>
+</body>
+
+</html>
