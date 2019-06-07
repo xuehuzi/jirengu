@@ -22,69 +22,86 @@
       }
 
       .select {
+         /* display: flex;
+            align-items: center; */
+         /* 以上两行可直接让imgpic和penandcolor垂直居中，老浏览器兼容性较差 */
          position: fixed;
+         width: 100%;
          background: slategray;
+         height: 50px;
       }
 
       .imgpic {
          float: left;
+         position: absolute;
+         top: 50%;
+         transform: translateY(-50%);
       }
+
+      .imgpic>IMG {
+         margin-left: 15px;
+      }
+
+
+
+
 
       .penandcolor {
-         float: right;
+         float: left;
+         margin-left: 190px;
+         position: absolute;
+         top: 50%;
+         transform: translateY(-50%);
       }
 
-      .imgpic>img {
-
-         padding: 10px;
+      .penandcolor>div {
+         float: left;
       }
 
-      .penandcolor>ul {
-         float: right;
-         padding: 10px;
-      }
 
-      .penandcolor>ul>li {
+      .penandcolor>div>span {
          width: 20px;
          height: 20px;
-         list-style: none;
-         float: right;
-         margin-right: 15px;
+         display: inline-block;
+         margin-left: 15px;
       }
 
+      .color_list {
+         margin-right: 50px;
+      }
 
-
-      .color_list>li:nth-child(1) {
+      .color_list>span:nth-child(1) {
          background: black;
       }
 
-      .color_list>li:nth-child(2) {
+      .color_list>span:nth-child(2) {
          background: red;
       }
 
-      .color_list>li:nth-child(3) {
+      .color_list>span:nth-child(3) {
          background: gold;
       }
 
-      .pen_list>li {
+
+      .pen_list>span {
          background: black;
          border-radius: 50%;
       }
 
-      .pen_list>li:nth-child(1) {
+      .pen_list>span:nth-child(1) {
          width: 10px;
          height: 10px;
 
       }
 
-      .pen_list>li:nth-child(2) {
+      .pen_list>span:nth-child(2) {
          width: 15px;
          height: 15px;
       }
 
-      .pen_list>li:nth-child(3) {
-         width: 20px;
+      .pen_list>span:nth-child(3) {
          height: 20px;
+         width: 20px;
       }
    </style>
 </head>
@@ -97,16 +114,16 @@
          <img id="download" src="./img/download.png" alt="下载" width="30px" height="30px">
       </div>
       <div class="penandcolor">
-         <ul class="color_list">
-            <li id="black" class="black brush_color"></li>
-            <li id="red" class="red brush_color"></li>
-            <li id="gold" class="gold brush_color"></li>
-         </ul>
-         <ul class="pen_list">
-            <li id="pen_one" class="thickness"></li>
-            <li id="pen_two" class="thickness"></li>
-            <li id="pen_three" class="thickness"></li>
-         </ul>
+         <div class="color_list">
+            <span id="black" class="black brush_color"></span>
+            <span id="red" class="red brush_color"></span>
+            <span id="gold" class="gold brush_color"></span>
+         </div>
+         <div class="pen_list">
+            <span id="pen_one" class="thickness"></span>
+            <span id="pen_two" class="thickness"></span>
+            <span id="pen_three" class="thickness"></span>
+         </div>
       </div>
    </div>
    <canvas id="my_canvas"></canvas>
@@ -224,7 +241,6 @@
          a.href = new_url;
          a.download = '我的画';
          a.click();
-         console.log(new_url)
       }
 
       if (document.body.ontouchstart !== undefined) {//特性检测
@@ -294,7 +310,6 @@
             if (eraser_flg) {
                my_graphics.clearRect(target_x, target_y, 20, 20);
             } else {
-               console.log(eraser_flg)
                draw(target_x, target_y, pen_width);
                draw_line(coordinate.x, coordinate.y, new_coordinate.x, new_coordinate.y);//*****
                coordinate = new_coordinate;//*****
