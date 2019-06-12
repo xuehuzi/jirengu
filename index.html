@@ -320,10 +320,14 @@
         let a_tags = document.querySelectorAll('.top_nav_inner > nav > ul> li >a');//
         for (let i = 0; i < a_tags.length; i++) {
             a_tags[i].onclick = function (tag) {
+                tag.preventDefault();//阻止a标签默认的跳转
                 let a_href = tag.currentTarget.getAttribute('href');//
-                let test = document.querySelector(a_href);//
-                let top = test.offsetTop;
-                window.scrollTo(0, top-100);
+                let Jump_target = document.querySelector(a_href);//
+                let Jump_top = Jump_target.offsetTop;
+                window.scrollTo(0, Jump_top-100);
+                // console.log(a_href)
+                // console.log(test)
+
             }
         }
     </script>
