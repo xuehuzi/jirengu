@@ -42,8 +42,8 @@
 
         @keyframes loading_animation {
             from {
-                height: 0px;
-                width: 0px;
+                height: 0;
+                width: 0;
                 opacity: 1;
             }
 
@@ -84,7 +84,6 @@
             animation: underline_animation .5s;
             position: absolute;
             top: 100%;
-            width: 100%;
         }
 
         @keyframes underline_animation {
@@ -269,10 +268,10 @@
         <script>
             works_bar1.onclick = function () {
                 works_bar_inner.className = 'works_bar_inner'
-            }
+            };
             works_bar2.onclick = function () {
                 works_bar_inner.className = 'works_bar_inner2'
-            }
+            };
             works_bar3.onclick = function () {
                 works_bar_inner.className = 'works_bar_inner3'
             }
@@ -296,7 +295,7 @@
 
         setTimeout(function () {
             set_loading.classList.remove('loading');
-        }, 10)
+        }, 3000);
 
         window.onscroll = function (target) {
             //console.log(window.scrollY);
@@ -305,14 +304,14 @@
             } else {
                 top_nav.classList.remove('top_nav_bg');
             }
-        }
+        };
 
         let li_tags = document.querySelectorAll('.top_nav_inner > nav > ul> li');
         for (let i = 0; i < li_tags.length; i++) {
             li_tags[i].onmouseenter = function (tag) {
                 //console.log(li_tags[i])
                 tag.currentTarget.classList.add('nav_list_show');
-            }
+            };
             li_tags[i].onmouseleave = function (tag) {
                 tag.currentTarget.classList.remove('nav_list_show');
             }
@@ -327,7 +326,6 @@
                 window.scrollTo(0, Jump_top-100);
                 // console.log(a_href)
                 // console.log(test)
-
             }
         }
     </script>
