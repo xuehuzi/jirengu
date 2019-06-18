@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     <script src="//at.alicdn.com/t/font_1191386_1d4khruylrx.js"></script>
+    <script src="//at.alicdn.com/t/font_1191386_1d4khruylrx.js"></script>
     <link rel="stylesheet" href="./style/resume_style.css">
     <title>简历练习</title>
     <style>
@@ -74,7 +74,7 @@
             display: block;
         }
 
-        .top_nav_inner > nav > ul > li.nav_list_show > a::after,.top_nav_inner > nav > ul > li.highlight > a::after {
+        .top_nav_inner > nav > ul > li.nav_list_show > a::after, .top_nav_inner > nav > ul > li.active > a::after {
             content: '';
             display: block;
             width: 100%;
@@ -104,6 +104,18 @@
                 margin-right: 0;
             }
         }
+
+
+        [data_x] {
+            transform: translateY(200px);
+        }
+
+        [data_x].offsittop {
+            transform: translateY(0);
+            transition: all 0.3s;
+        }
+
+
     </style>
 </head>
 
@@ -112,7 +124,7 @@
     <div class="loading_mask">
     </div>
 </div>
-<div data_x id="top_nav" class="top_nav">
+<div id="top_nav" class="top_nav">
     <div class="top_nav_inner clearfix">
         <a class="logo" href="#" alt='logo'>
             <span class="rs">RS</span>
@@ -121,7 +133,7 @@
         </a>
         <nav>
             <ul class="clearfix">
-                <li><a href="#about_me">关于</a></li>
+                <li class="active"><a href="#about_me">关于</a></li>
                 <li>
                     <a href="#about_skill">技能</a>
                     <ul class="nav_list_ul">
@@ -156,8 +168,8 @@
 <div class="banner">
     <div class="mask"></div>
 </div>
-<main data_x id="about_me" class="main">
-    <div class="user_card">
+<main class="main">
+    <div data_x id="about_me" class="user_card">
         <div class="user_card_PicAndTxt clearfix">
             <div class="user_pic">
                 <img src="./img/avatar.jpg" alt="头像">
@@ -298,21 +310,58 @@
 
     requestAnimationFrame(animate);
 
-    setTimeout(function () {
-        set_loading.classList.remove('loading');
-    }, 250);
 
-    window.onscroll = function (tag) {//nav根据滚动条（scrollY）显示的动画
+    setTimeout(function () {
+        set_loading.classList.remove('loading');//加载动画
+
+        let signs_2 = document.querySelectorAll('[data_x]');
+        for (let i = 0; i < signs_2.length; i++) {
+            signs_2[i].classList.remove('offsittop');
+        }
+        test();
+    }, 2000);
+
+    ////滚动到对应模块时的动效
+    function test() {
+        let signs = document.querySelectorAll('[data_x]');//选择所有包含data_x标记的标签
+        let sign_index = 0;//设置默认从第几位开始
+        for (let i = 1; i < signs.length; i++) {//求出几个目标元素，哪一个距离当前滚动距离最近
+            if (Math.abs(signs[i].offsetTop - window.scrollY) < Math.abs(signs[sign_index].offsetTop - window.scrollY)) {
+                sign_index = i;
+            }
+        }
+        let current_id = signs[sign_index].id;//获取当前距离top最近元素的id【注意变量位置，放的地方不同执行结果有差异】
+        let a = document.querySelector('a[href="#' + current_id + '"]');
+        let li = a.parentNode;
+        let select_son = li.parentNode.children;
+        //选择所有li标签（说明：先选取li的父元素，再选择li父元素所有的子元素，此时选取的子元素也包括li自己）
+        for (let i = 0; i < select_son.length; i++) {//先清除所有，已有下划线的状态,然后给距离最近的那个元素加上样式
+            select_son[i].classList.remove('active')
+        }
+        li.classList.add('active');
+        ////浏览到对应模块时给nav列表对应的标签加选中下划线
+        /*
+        * 选出标签（通过给对应的标签加data_x来标记）
+        * 遍历当前正在聚焦浏览的标签
+        * 遍历取消所有nav的下划线类
+        * 给当前浏览（距离最近）的那个元素加上样式
+        */
+        signs[sign_index].classList.add('offsittop');
+    }
+
+    ////nav根据滚动条是否滚动（scrollY）显示的动画
+    window.onscroll = function () {
         //console.log(window.scrollY);
         if (window.scrollY > 0) {
             top_nav.classList.add('top_nav_bg');
         } else {
             top_nav.classList.remove('top_nav_bg');
         }
+        test();
     };
 
-
-    let li_tags = document.querySelectorAll('.top_nav_inner > nav > ul> li');//根据选择器获取所有的li
+    ////nav列表鼠标移入移出事件
+    let li_tags = document.querySelectorAll('.top_nav_inner > nav > ul> li');
     for (let i = 0; i < li_tags.length; i++) {//nav关于技能等子菜单显示关闭
         li_tags[i].onmouseenter = function (tag) {//添加li鼠标事件（放上）
             //console.log(li_tags[i])
@@ -323,7 +372,7 @@
         }
     }
 
-
+    ////nav列表点击后对应模块缓动事件
     let a_tags = document.querySelectorAll('.top_nav_inner > nav > ul> li >a');//
     for (let i = 0; i < a_tags.length; i++) {
         a_tags[i].onclick = function (tag) {
@@ -370,7 +419,6 @@
                 .start(); // 开始缓动
         }
     }
-
 
 </script>
 
