@@ -228,7 +228,7 @@
     <ol class="clearfix">
         <li>
             <h3>HTML 5 &amp; CSS 3</h3>
-            <div class="skill_bar skill_bar1">
+            <div class="skill_bar">
 
             </div>
         </li>
@@ -339,6 +339,14 @@
             select_son[i].classList.remove('active')
         }
         li.classList.add('active');
+
+        let skill_bar = document.getElementsByClassName('skill_bar');
+        for (let i = 0; i < skill_bar.length; i++) {
+            if (sign_index === 1) {
+                skill_bar[i].classList.add('skill_bar11')
+            }
+        }
+
         ////浏览到对应模块时给nav列表对应的标签加选中下划线
         /*
         * 选出标签（通过给对应的标签加data_x来标记）

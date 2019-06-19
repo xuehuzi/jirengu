@@ -21,7 +21,7 @@ a {
     text-decoration: none;
 }
 
-li{
+li {
     list-style: none;
 }
 
@@ -74,20 +74,20 @@ li{
     padding: 7px 0 0 0;
 }
 
-.top_nav nav>ul {
+.top_nav nav > ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.top_nav nav>ul>li  {
+.top_nav nav > ul > li {
     position: relative;
     float: left;
     margin: 0 17px 0 17px;
     white-space: nowrap;
 }
 
-.top_nav nav>ul>li>a {
+.top_nav nav > ul > li > a {
     font-size: 12px;
     color: inherit;
     font-weight: bold;
@@ -122,7 +122,7 @@ li{
     padding: 50px;
 }
 
-.user_card_PicAndTxt>.user_pic {
+.user_card_PicAndTxt > .user_pic {
     float: left;
     margin-right: 65px;
 }
@@ -151,7 +151,7 @@ li{
     border-top-width: 0;
 }
 
-.user_card_PicAndTxt>.user_txt {
+.user_card_PicAndTxt > .user_txt {
     float: left;
     width: 470px;
 }
@@ -243,7 +243,7 @@ li{
     margin: 0 auto;
 }
 
-.self_skills>h2 {
+.self_skills > h2 {
     text-align: center;
     color: #3d4451;
     font-size: 34px;
@@ -251,27 +251,27 @@ li{
     font-weight: 600;
 }
 
-.self_skills>ol {
+.self_skills > ol {
     background: white;
     padding: 10px 50px 50px 50px;
     margin-top: 30px;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 }
 
-.self_skills>ol>li {
+.self_skills > ol > li {
     list-style: none;
     float: left;
     width: 48%;
     margin-top: 38px
 }
 
-.self_skills>ol>li>h3 {
+.self_skills > ol > li > h3 {
     font-size: 14px;
     line-height: 1.1;
     font-weight: normal;
 }
 
-.self_skills>ol>li:nth-child(even) {
+.self_skills > ol > li:nth-child(even) {
     /* border: 1px solid cadetblue; */
     float: right;
 }
@@ -282,6 +282,7 @@ li{
     background: #FAE1E1;
     border-radius: 2px;
     margin-top: 4px;
+    overflow:hidden;
 }
 
 .skill_bar::before {
@@ -291,29 +292,37 @@ li{
     height: 100%;
     float: left;
     border-radius: 2px;
+    transform: translateX(-100%);
 }
 
-.self_skills>ol>li:nth-child(1)>div::before {
+.skill_bar11::before {
+    transform: translateX(0);
+    transition: all 1s;
+}
+
+
+
+.self_skills > ol > li:nth-child(1) > div::before {
     width: 10%;
 }
 
-.self_skills>ol>li:nth-child(2)>div::before {
+.self_skills > ol > li:nth-child(2) > div::before {
     width: 20%;
 }
 
-.self_skills>ol>li:nth-child(3)>div::before {
+.self_skills > ol > li:nth-child(3) > div::before {
     width: 30%;
 }
 
-.self_skills>ol>li:nth-child(4)>div::before {
+.self_skills > ol > li:nth-child(4) > div::before {
     width: 40%;
 }
 
-.self_skills>ol>li:nth-child(5)>div::before {
+.self_skills > ol > li:nth-child(5) > div::before {
     width: 50%;
 }
 
-.self_skills>ol>li:nth-child(6)>div::before {
+.self_skills > ol > li:nth-child(6) > div::before {
     width: 60%;
 }
 
@@ -326,27 +335,27 @@ li{
     text-align: center;
 }
 
-.works>h2 {
+.works > h2 {
     color: #3d4451;
     font-size: 34px;
     line-height: 1.2;
     font-weight: 600;
 }
 
-.works>nav {
+.works > nav {
     /* border: 1px solid red; */
     display: inline-block;
     margin-top: 32px;
 }
 
-.works>nav>ol>li {
+.works > nav > ol > li {
     list-style: none;
     float: left;
     margin-left: 40px;
     cursor: pointer;
 }
 
-.works>nav>ol>li:first-child {
+.works > nav > ol > li:first-child {
     margin-left: 0;
 }
 
@@ -391,15 +400,15 @@ li{
     position: relative;
 }
 
-.works_list>div {
+.works_list > div {
     float: left;
     position: absolute;
 }
 
-.works_list>div:nth-child(n+2) {
+.works_list > div:nth-child(n+2) {
     left: 645px;
 }
 
-.works_list>div:nth-child(3) {
+.works_list > div:nth-child(3) {
     top: 312px
 }
