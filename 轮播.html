@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播</title>
+    <style>
+        .main {
+            width: 300px;
+            overflow: hidden;
+
+        }
+
+        .img_bg {
+            display: flex;
+            align-items: flex-start;
+            transition: all 0.5s;
+        }
+
+        .img_bg > img {
+            vertical-align: top;
+        }
+
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div id="img_bg" class="img_bg">
+        <img src="https://fthmb.tqn.com/0ui_Zw01Ht9NHJkSBlqOIC1IH44=/960x0/filters:no_upscale()/yorkshire-terrier-583788122-581630e85f9b581c0b018a00.jpg"
+             alt="" width="300" height="200">
+        <img src="https://canna-pet.com/wp-content/uploads/2017/06/20-longest-living-dog-breeds_canna-pet-e1498599846169.jpg"
+             alt="" width="300" height="200">
+        <img src="https://fthmb.tqn.com/0ui_Zw01Ht9NHJkSBlqOIC1IH44=/960x0/filters:no_upscale()/yorkshire-terrier-583788122-581630e85f9b581c0b018a00.jpg"
+             alt="" width="300" height="200">
+        <img src="https://canna-pet.com/wp-content/uploads/2017/06/20-longest-living-dog-breeds_canna-pet-e1498599846169.jpg"
+             alt="" width="300" height="200">
+    </div>
+</div>
+<div class="btn">
+    <span class="red">第一张</span>
+    <span>第二张</span>
+    <span>第三张</span>
+    <span>第四张</span>
+</div>
+
+<script>
+    let btn = document.querySelectorAll('.btn > span');
+    let flg = 0;
+    let btn_length = btn.length;
+    for (let i = 0; i < btn.length; i++) {
+        btn[i].index = i;
+        btn[i].onclick = function () {
+            clearInterval();
+            for (let i = 0; i < btn.length; i++) {//设置当前红色前，清空之前设置的红色
+                btn[i].classList.remove('red');
+            }
+            flg = this.index;
+            //保证点击和自动播放的顺序是相同的，例：自动播放到第三手动点第一，按理自动播放应从第二继续，不设置的话自动播放会到第四
+
+            img_bg.style.transform = 'translate(' + btn[i].index * -300 + 'px)';
+            btn[this.index].classList.add('red');
+        }
+    }
+
+    setInterval(function () {
+        flg += 1;
+        for (let i = 0; i < btn.length; i++) {//设置当前红色前，清空之前设置的红色
+            btn[i].classList.remove('red');
+        }
+        if (flg === btn_length) {
+            clearInterval();
+            flg = 0;
+        }
+        //console.log(flg);
+        img_bg.style.transform = 'translate(' + flg * -300 + 'px)';
+        btn[flg].classList.add('red');
+    }, 3000)
+</script>
+</body>
+</html>

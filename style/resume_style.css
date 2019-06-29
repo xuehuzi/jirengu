@@ -25,6 +25,51 @@ li {
     list-style: none;
 }
 
+.loading {
+    position: fixed;
+    background: #efefef;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading_mask {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+}
+
+.loading::before,
+.loading::after {
+    content: '';
+    position: absolute;
+    /* border: 1px solid red; */
+    border-radius: 50%;
+    animation: loading_animation 2s linear infinite;
+    background: black;
+}
+
+.loading::after {
+    animation-delay: 0.75s;
+}
+
+@keyframes loading_animation {
+    from {
+        height: 0;
+        width: 0;
+        opacity: 1;
+    }
+
+    to {
+        height: 100px;
+        width: 100px;
+        opacity: 0;
+    }
+}
+
 .clearfix::after {
     content: '';
     display: block;
@@ -85,6 +130,66 @@ li {
     float: left;
     margin: 0 17px 0 17px;
     white-space: nowrap;
+}
+
+.nav_list_ul {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    animation: ul_animation .5s;
+    background: white;
+    color: #3d4451;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.nav_list_ul > li {
+    padding: 5px 10px;
+}
+
+.top_nav_inner > nav > ul > li.nav_list_show > .nav_list_ul {
+    display: block;
+}
+
+.top_nav_inner > nav > ul > li.nav_list_show > a::after, .top_nav_inner > nav > ul > li.active > a::after {
+    content: '';
+    display: block;
+    width: 100%;
+    background: #e06567;
+    height: 3px;
+    animation: underline_animation .5s;
+    position: absolute;
+    top: 100%;
+}
+
+@keyframes underline_animation {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes ul_animation {
+    0% {
+        margin-right: 100%;
+    }
+
+    100% {
+        margin-right: 0;
+    }
+}
+
+
+[data_x] {
+    transform: translateY(200px);
+}
+
+[data_x].offsittop {
+    transform: translateY(0);
+    transition: all 0.3s;
 }
 
 .top_nav nav > ul > li > a {
