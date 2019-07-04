@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>苹果风格轮播和关闭浮层</title>
+    <style>
+
+        body {
+            background: #f6f6f6;
+        }
+
+        .min {
+            max-width: 920px;
+            border: 1px solid white;
+            box-shadow: 0 0 3px #AAAAAA;
+            border-bottom-right-radius: 4px;
+            margin: 0 auto;
+        }
+
+        .img_window {
+            overflow: hidden;
+            width: 100%;
+            min-height: 400px;
+            position: relative;
+        }
+
+        .img_body {
+            width: 3860px;
+            position: absolute;
+            transition: all 0.5s;
+        }
+
+        .img_body > div {
+            float: left;
+        }
+
+        footer {
+            width: 100%;
+            height: 45px;
+            background: #eaeaea; /* Old browsers */
+            background: linear-gradient(to bottom, #eaeaea 1%, #f8f8f8 50%, #f2f2f2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            text-align: center;
+        }
+
+        .footer_img {
+            height: 100%;
+            display: inline-block;
+        }
+
+        .active {
+            background: url('https://demo.tutorialzine.com/2009/11/beautiful-apple-gallery-slideshow/img/active_bg.png') no-repeat;
+        }
+
+        .footer_img > div {
+            width: 60px;
+            height: 45px;
+            float: left;
+            position: relative;
+        }
+
+        .footer_img > div > :last-child {
+            display: inline-block;
+            height: 100%;
+            width: 100%;
+            background: url("https://demo.tutorialzine.com/2009/11/beautiful-apple-gallery-slideshow/img/divider.png") no-repeat left;
+        }
+
+        .footer_img > :first-child {
+            display: inline-block;
+            height: 100%;
+            width: 2px;
+            background: url("https://demo.tutorialzine.com/2009/11/beautiful-apple-gallery-slideshow/img/divider.png") no-repeat right;
+
+        }
+
+
+        .footer_img > div > img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .task2{
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .div {
+            width: 200px;
+            height: 100px;
+            border: 1px solid black;
+            border-radius: 10px;
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
+            display: none;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+<div class="min">
+    <div class="img_window">
+        <div id="img_body" class="img_body">
+            <div><img
+                    src="https://demo.tutorialzine.com/2009/11/beautiful-apple-gallery-slideshow/img/sample_slides/macbook.jpg"
+                    alt="1"></div>
+            <div><img
+                    src="https://demo.tutorialzine.com/2009/11/beautiful-apple-gallery-slideshow/img/sample_slides/iphone.jpg"
+                    alt="2"></div>
+            <div><img
+                    src="https://demo.tutorialzine.com/2009/11/beautiful-apple-gallery-slideshow/img/sample_slides/imac.jpg"
+                    alt="3"></div>
+            <div><img
+                    src="https://demo.tutorialzine.com/2009/11/beautiful-apple-gallery-slideshow/img/sample_slides/info.jpg"
+                    alt="4"></div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer_img">
+            <span></span>
+            <div class="active">
+                <img src="https://demo.tutorialzine.com/2009/11/beautiful-apple-gallery-slideshow/img/sample_slides/thumb_macbook.png"
+                     alt="1">
+
+                <span></span>
+            </div>
+            <div>
+                <img src="https://demo.tutorialzine.com/2009/11/beautiful-apple-gallery-slideshow/img/sample_slides/thumb_iphone.png"
+                     alt="2">
+                <span></span>
+            </div>
+            <div>
+                <img src="https://demo.tutorialzine.com/2009/11/beautiful-apple-gallery-slideshow/img/sample_slides/thumb_imac.png"
+                     alt="3">
+                <span></span>
+            </div>
+            <div>
+                <img src="https://demo.tutorialzine.com/2009/11/beautiful-apple-gallery-slideshow/img/sample_slides/thumb_about.png"
+                     alt="4">
+                <span></span>
+            </div>
+        </div>
+    </footer>
+</div>
+<div class="task2">
+    <button id="btn" class="btn">点我打开浮层</button>
+    <div id="div" class="div"></div>
+</div>
+<script>
+    let btns = document.querySelectorAll('.footer_img>div');
+    for (let i = 0; i < btns.length; i++) {
+        btns[i].index = i;
+        btns[i].onclick = function () {
+            for (let i = 0; i < btns.length; i++) {
+                btns[i].classList.remove('active');
+            }
+
+            img_body.style.transform = 'translate(' + this.index * -920 + 'px)';
+            btns[this.index].classList.add('active');
+
+        }
+    }
+    //alert(btn.length)
+    //9号早上动车到青岛住一晚，1274+350
+    //10号青岛海洋世界       300
+    //11号大黑岛
+    //13号长岛
+    //16返程
+    function getStyle(obj, attr) {
+        if (obj.currentStyle) {
+            //alert(obj.currentStyle[attr]);
+            return obj.currentStyle[attr];
+        } else {
+            return getComputedStyle(obj, false)[attr];
+        }
+    }//style内或者外链CSS文件的样式不能直接获取到
+
+    btn.addEventListener('click', function (e) {
+        e.stopPropagation();////阻止btn事件冒泡
+        if (getStyle(div, 'display') === 'none') {//先判断浮层display状态，关闭则显示，显示则关闭
+            btn.innerText = '点我关闭浮层';
+            div.style.display = 'block';
+        } else {
+            btn.innerText = '点我打开浮层';
+            div.style.display = 'none';
+        }
+        setTimeout(function () {//节省资源方法，假如页面有很多类似功能，每次都设置会浪费系统资源
+            document.addEventListener('click', function () {
+                div.style.display = 'none';
+            });
+        }, 0)
+    });
+
+
+    div.addEventListener('click', function (e) {
+        e.stopPropagation();//阻止div事件冒泡
+    })
+</script>
+</body>
+
+</html>
