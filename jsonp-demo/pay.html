@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style.css">
+    <title>index</title>
+</head>
+
+<body>
+    <h5>您的账户余额是<span id="amount">&&&amount&&&</span></h5>
+    <button id="button">打钱</button>
+</body>
+<script>
+    button.addEventListener('click', function (e) {
+        let script = document.createElement('script');
+        let name = 'function_name' + parseInt(Math.random() * 100000, 10);//每次随机产生函数名
+        window[name] = function (callback_parameter) {//判断服务器返回状态是成功还是失败
+            console.log(callback_parameter);
+            if (callback_parameter === 'success') {
+                amount.innerText = amount.innerText - 1;
+            } else {
+                alert('打钱失败');
+            }
+        }
+        //script.src = 'http://one.com:8001/pay?callback=' + name;
+        script.src = './pay?callback=' + name;
+        document.body.appendChild(script);
+        //debugger
+        script.onload = function (e) {
+            e.currentTarget.remove();
+            delete window[name];
+        }
+        script.onerror = function (e) {
+            e.currentTarget.remove();
+            delete window[name];
+        }
+    })
+</script>
+<script src="./main.js"></script>
+
+</html>

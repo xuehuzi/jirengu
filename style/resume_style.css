@@ -517,3 +517,29 @@ li {
 .works_list > div:nth-child(3) {
     top: 312px
 }
+
+.msgs{
+    max-width: 940px;
+    margin: 0 auto;
+} 
+
+.msgs>h2{
+    text-align: center;
+    color: #3d4451;
+    font-size: 34px;
+    line-height: 1.2;
+    font-weight: 600;
+}
+
+.msgs>ol>li{
+    padding: 15px;
+    border-top: 1px solid #DDD;
+}
+
+.msgs>ol>li:last-child{
+    border-bottom: 1px solid #DDD;
+}
+.msgs>form{
+    margin: 15px;
+    text-align: center;
+}
