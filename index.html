@@ -184,9 +184,9 @@
         <h2>留言</h2>
         <ol id="msg_list"></ol>
         <form id="postmesg">
-            <label for="姓名"></label>
+            <label>姓名：</label>
             <input type="text" name="name">
-            <label for="内容"></label>
+            <label>内容：</label>
             <input type="text" name="content">
             <input type="submit" value="提交">
         </form>
@@ -346,7 +346,7 @@
         query.find().then(
             function (todos) {
                 let history_msg = todos.map((tgas) => tgas.attributes);
-                console.log(history_msg)
+                //console.log(history_msg)
                 history_msg.forEach((todo) => {
                     let li = document.createElement('li');
                     li.innerText = `${todo.name}: ${todo.msgvalue}`;
@@ -365,18 +365,24 @@
             let msgvalue = postmesg.querySelector('input[name = content]').value;
             let leave_Msg = AV.Object.extend('leave_msg');//创建表
             let leave_msg = new leave_Msg();//在表中创建数据
-            alert(namevalue)
-            leave_msg.save({
-                'name': namevalue,
-                'msgvalue': msgvalue
-            }).then(function (obj) {
-                let li = document.createElement('li');
-                li.innerText = `${obj.attributes.name}: ${obj.attributes.msgvalue}`;
-                msg_list.appendChild(li);
-                postmesg.querySelector('input[name = content]').value = '';
-                console.log('存入OK')
-                console.log(obj)
-            })
+            if (namevalue && msgvalue !== '') {
+                leave_msg.save({
+                    'name': namevalue,
+                    'msgvalue': msgvalue
+                }).then(function (obj) {
+                    let li = document.createElement('li');
+                    li.innerText = `${obj.attributes.name}: ${obj.attributes.msgvalue}`;
+                    msg_list.appendChild(li);
+                    postmesg.querySelector('input[name = content]').value = '';
+                    postmesg.querySelector('input[name = name]').value = '';
+                    //console.log('存入OK')
+                    //console.log(obj)
+                })
+            } else {
+                alert('请输入内容')
+            }
+
+
         }
     </script>
 
