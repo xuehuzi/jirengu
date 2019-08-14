@@ -13,7 +13,7 @@
 
 body {
     margin: 0;
-    background: #efefef;
+    /*background: #efefef;*/
 }
 
 a {
@@ -25,31 +25,43 @@ li {
     list-style: none;
 }
 
-.loading {
+.bdy {
+    display: none;
+}
+
+.loading_animation {
     position: fixed;
-    background: #efefef;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
+    overflow: auto;
 }
 
-.loading_mask {
-    width: 200px;
-    height: 200px;
+.code{
+    margin-top: 25px;
     position: absolute;
+    margin-bottom: 25px;
+
+}
+
+.loading {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 150px;
 }
 
 .loading::before,
 .loading::after {
     content: '';
     position: absolute;
-    /* border: 1px solid red; */
     border-radius: 50%;
     animation: loading_animation 2s linear infinite;
     background: black;
+
 }
 
 .loading::after {
@@ -387,7 +399,7 @@ li {
     background: #FAE1E1;
     border-radius: 2px;
     margin-top: 4px;
-    overflow:hidden;
+    overflow: hidden;
 }
 
 .skill_bar::before {
@@ -404,7 +416,6 @@ li {
     transform: translateX(0);
     transition: all 1s;
 }
-
 
 
 .self_skills > ol > li:nth-child(1) > div::before {
@@ -518,12 +529,12 @@ li {
     top: 312px
 }
 
-.msgs{
+.msgs {
     max-width: 940px;
     margin: 0 auto;
-} 
+}
 
-.msgs>h2{
+.msgs > h2 {
     text-align: center;
     color: #3d4451;
     font-size: 34px;
@@ -531,15 +542,16 @@ li {
     font-weight: 600;
 }
 
-.msgs>ol>li{
+.msgs > ol > li {
     padding: 15px;
     border-top: 1px solid #DDD;
 }
 
-.msgs>ol>li:last-child{
+.msgs > ol > li:last-child {
     border-bottom: 1px solid #DDD;
 }
-.msgs>form{
+
+.msgs > form {
     margin: 15px;
     text-align: center;
 }
