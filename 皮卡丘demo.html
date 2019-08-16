@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>皮卡丘</title>
+    <style id="styleid"></style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            /*flex-direction: column;*/
+        }
+
+        .code_wrapper {
+            flex: 1;
+            width: 100%;
+            background: #eeee;
+            overflow: auto;
+        }
+
+        .canvas {
+            position: relative;
+            flex: 1;
+            width: 100%;
+
+        }
+
+        .wrapper {
+            position: relative;
+            height: 170px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /*border: 1px solid red;*/
+        }
+
+        /*.eye {*/
+        /*position: absolute;*/
+        /*width: 49px;*/
+        /*height: 49px;*/
+        /*background: #2E2E2E;*/
+        /*border-radius: 50%;*/
+        /*border: 2px solid #000000;*/
+        /*}*/
+
+        /*.eye_left {*/
+        /*left: 50%;*/
+
+        /*margin-left: 90px;*/
+        /*}*/
+
+        /*.eye_right {*/
+        /*right: 50%;*/
+        /*margin-right: 90px;*/
+        /*}*/
+
+        /*.eye_left::after, .eye_right::after {*/
+        /*content: '';*/
+        /*position: absolute;*/
+        /*width: 25px;*/
+        /*height: 25px;*/
+        /*border-radius: 50%;*/
+        /*background: white;*/
+        /*left: 8px;*/
+        /*top: -1px;*/
+        /*border: 2px solid #000;*/
+        /*}*/
+
+        /*.nose {*/
+        /*width: 0;*/
+        /*height: 0;*/
+        /*border-style: solid;*/
+        /*border-width: 12px;*/
+        /*border-color: black transparent transparent;*/
+        /*border-radius: 11px;*/
+        /*position: absolute;*/
+        /*left: 50%;*/
+        /*top: 28px;*/
+        /*margin-left: -12px;*/
+        /*}*/
+
+        /*.face {*/
+        /*width: 68px;*/
+        /*height: 68px;*/
+        /*background: #FC0D1C;*/
+        /*border: 2px solid black;*/
+        /*border-radius: 50%;*/
+        /*position: absolute;*/
+        /*top: 85px;*/
+        /*}*/
+
+        /*.face:first-child {*/
+        /*left: 50%;*/
+        /*margin-left: 116px;*/
+        /*}*/
+
+        /*.face:last-child {*/
+        /*right: 50%;*/
+        /*margin-right: 116px;*/
+        /*}*/
+
+        /*.lip {*/
+        /*height: 25px;*/
+        /*width: 80px;*/
+        /*border: 2px solid black;*/
+        /*position: absolute;*/
+        /*top: 50px;*/
+        /*background: #FDE348;*/
+        /*}*/
+
+        /*.lip:first-child {*/
+        /*right: 50%;*/
+        /*border-bottom-left-radius: 40px 25px;*/
+        /*border-top: none;*/
+        /*border-right: none;*/
+        /*transform: rotate(-20deg);*/
+        /*}*/
+
+        /*.lip:last-child {*/
+        /*left: 50%;*/
+        /*border-bottom-right-radius: 40px 25px;*/
+        /*border-top: none;*/
+        /*border-left: none;*/
+        /*transform: rotate(20deg);*/
+        /*}*/
+
+        /*.tongue_wrapper {*/
+        /*position: absolute;*/
+        /*top: 55px;*/
+        /*left: 50%;*/
+        /*margin-left: -150px;*/
+        /*height: 110px;*/
+        /*overflow: hidden;*/
+        /*width: 300px;*/
+        /*}*/
+
+        /*.tongue {*/
+        /*height: 3500px;*/
+        /*width: 300px;*/
+        /*background: #990513;*/
+        /*border-radius: 200px/2000px;*/
+        /*border: 2px solid black;*/
+        /*position: absolute;*/
+        /*bottom: 0;*/
+        /*overflow: hidden;*/
+        /*}*/
+
+        .code {
+            overflow: hidden;
+        }
+
+        .active {
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+        }
+
+        .btn {
+            position: fixed;
+            right: 10px;
+        }
+
+        .btn > button {
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div id="code_wrapper" class="code_wrapper">
+    <pre id="code" class="code"></pre>
+</div>
+<div class="canvas">
+    <div class="wrapper">
+        <div class="tongue_wrapper">
+            <div class="tongue"></div>
+        </div>
+        <div class="eye_wrapper">
+            <div class="eye eye_left"></div>
+            <div class="eye eye_right"></div>
+        </div>
+        <div class="nose"></div>
+        <div class="face_wrapper">
+            <div class="face"></div>
+            <div class="face"></div>
+        </div>
+        <div class="lip_wrapper">
+            <div class="lip"></div>
+            <div class="lip"></div>
+        </div>
+    </div>
+</div>
+<div class="btn">
+    <button class="set_speed">慢速</button>
+    <button class="set_speed active">中速</button>
+    <button class="set_speed">快速</button>
+</div>
+<script>
+    !function () {
+        let str = `
+        /*
+        * hi你好，欢迎！！！！！！！测试一下。
+        */
+        .canvas {
+            background: #FEE433;
+        }
+
+        .eye {
+            position: absolute;
+            width: 49px;
+            height: 49px;
+            background: #2E2E2E;
+            border-radius: 50%;
+            border: 2px solid #000000;
+        }
+
+        .eye_left {
+            left: 50%;
+
+            margin-left: 90px;
+        }
+
+        .eye_right {
+            right: 50%;
+            margin-right: 90px;
+        }
+
+        .eye_left::after, .eye_right::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: white;
+            left: 8px;
+            top: -1px;
+            border: 2px solid #000;
+        }
+
+        .nose {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 12px;
+            border-color: black transparent transparent;
+            border-radius: 11px;
+            position: absolute;
+            left: 50%;
+            top: 28px;
+            margin-left: -12px;
+        }
+
+        .face {
+            width: 68px;
+            height: 68px;
+            background: #FC0D1C;
+            border: 2px solid black;
+            border-radius: 50%;
+            position: absolute;
+            top: 85px;
+        }
+
+        .face:first-child {
+            left: 50%;
+            margin-left: 116px;
+        }
+
+        .face:last-child {
+            right: 50%;
+            margin-right: 116px;
+        }
+
+                .lip {
+            height: 25px;
+            width: 80px;
+            border: 2px solid black;
+            position: absolute;
+            top: 50px;
+            background: #FDE348;
+        }
+
+        .lip:first-child {
+            right: 50%;
+            border-bottom-left-radius: 40px 25px;
+            border-top: none;
+            border-right: none;
+            transform: rotate(-20deg);
+        }
+
+        .lip:last-child {
+            left: 50%;
+            border-bottom-right-radius: 40px 25px;
+            border-top: none;
+            border-left: none;
+            transform: rotate(20deg);
+        }
+
+        .tongue_wrapper {
+            position: absolute;
+            top: 55px;
+            left: 50%;
+            margin-left: -150px;
+            height: 110px;
+            overflow: hidden;
+            width: 300px;
+        }
+
+        .tongue {
+            height: 3500px;
+            width: 300px;
+            background: #990513;
+            border-radius: 200px/2000px;
+            border: 2px solid black;
+            position: absolute;
+            bottom: 0;
+            overflow: hidden;
+        }
+        `;
+        let speed = 10;
+        let set_speed = document.querySelectorAll('.set_speed');
+        for (let i = 0; i < set_speed.length; i++) {
+            set_speed[i].onclick = function (tga) {
+                for (let i = 0; i < set_speed.length; i++) {
+                    set_speed[i].classList.remove('active')
+                }
+                set_speed[i].classList.add('active');
+                let speed_value = set_speed[i].innerHTML;
+                switch (speed_value) {
+                    case '快速':
+                        speed = 10;
+                        break;
+                    case '中速':
+                        speed = 50;
+                        break;
+                    case '慢速':
+                        speed = 100;
+                        break;
+                }
+            }
+        }
+
+        function writ_code(target_node, target_code, fn) {
+            let flg = 0;
+            let timer = setTimeout(function run() {
+                flg += 1;
+                target_node.innerHTML = target_code.substring(0, flg);
+                target_node.innerHTML = target_node.innerHTML.replace('#code', '<span style="color:red">code</span>');
+                styleid.innerHTML = target_code.substring(0, flg);
+                code_wrapper.scrollTop = code_wrapper.scrollHeight;
+                if (flg < str.length) {
+                    timer = setTimeout(run, speed);
+                } else {
+                    clearTimeout(timer);
+                    fn && fn.call();
+                }
+            }, speed);
+        }
+
+        writ_code(code, str);
+
+    }.call();
+
+
+</script>
+</body>
+
+</html>
