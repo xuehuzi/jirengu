@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>父元素定宽高，子元素（内联）垂直居中</title>
+    <style>
+        .wp {
+            border: 1px solid red;
+            height: 300px;
+            line-height: 300px;
+            text-align: center;
+        }
+
+        img {
+            border: 1px solid black;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wp">
+        <img src="https://www.runoob.com/try/demo_source/smiley-2.gif">
+    </div>
+    <p> 一般内联元素垂直居中时，父元素加了line-heigth：?px/*值为父元素高度*/ 则子元素需要加vertical-align: middle;</p>
+</body>
+
+</html>

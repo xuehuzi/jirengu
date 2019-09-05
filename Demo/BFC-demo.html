@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BFC</title>
+    <style>
+        .example1_1 {
+            border: 3px solid rebeccapurple;
+
+        }
+
+        .example1_2 {
+            float: left;
+            width: 200px;
+            height: 150px;
+            background-color: grey;
+        }
+
+        .example1_3 {
+            border: 3px solid rebeccapurple;
+            overflow: auto;
+        }
+
+        .example1_4 {
+            float: left;
+            width: 200px;
+            height: 150px;
+            background-color: grey;
+        }
+
+        .example2_1 {
+            width: 100px;
+            height: 100px;
+            background: lightblue;
+            margin: 10px;
+        }
+
+        .example2_3 {
+            width: 100px;
+            height: 100px;
+            background: lightblue;
+            margin: 10px;
+        }
+
+        .example2_2 {
+            overflow: hidden;
+        }
+
+        .example3_1 {
+            width: 200px;
+            height: 200px;
+            background: skyblue;
+            float: left;
+        }
+
+        .example3_2 {
+            background: pink;
+            height: 300px;
+        }
+
+        .example3_3 {
+            width: 200px;
+            height: 200px;
+            background: skyblue;
+            float: left;
+        }
+
+        .example3_4 {
+            background: pink;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .example4_1 {
+            height: 200px;
+            background: grey;
+        }
+
+        .example4_2 {
+            height: 100px;
+            background: green;
+            margin-top: 50px;
+        }
+
+        .example4_3 {
+            height: 200px;
+            background: grey;
+            /* overflow: hidden; */
+            padding-top: 0.1px;
+        }
+
+        .example4_4 {
+            height: 100px;
+            background: green;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <legend>让浮动内容和周围的内容等高</legend>
+        <div class="example1_1">
+            <div class="example1_2">I am a floated box!</div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>让浮动内容和周围的内容等高</legend>
+        <div class="example1_3">
+            <div class="example1_4">I am a floated box!</div>
+        </div>
+        <p>两个父子元素，父元素不定宽高子元素定宽高且浮动，子元素浮动后脱离文档流撑不起父元素。父元素加overflow除了visible的值都可</p>
+    </fieldset>
+
+    <fieldset>
+        <legend>解决外边距重叠</legend>
+        <div class="example2_1"></div>
+        <div class="example2_1"></div>
+    </fieldset>
+    <fieldset>
+        <legend>解决外边距重叠</legend>
+        <div class="example2_2">
+            <div class="example2_3"></div>
+        </div>
+        <div class="example2_2">
+            <div class="example2_3"></div>
+        </div>
+        <p>给外边距重叠的两个元素分别加一个父元素，父元素加overflow除了visible的值都可</p>
+    </fieldset>
+    <fieldset>
+        <legend>两栏或三栏自适应布局&&避免文字环绕</legend>
+        <div class="example3_1">我是浮动的，我盖住了别的元素</div>
+        <div class="example3_2"></div>
+    </fieldset>
+    <fieldset>
+        <legend>两栏或三栏自适应布局&&避免文字环绕</legend>
+        <div class="example3_3">我是浮动的，我没有盖住别的元素</div>
+        <div class="example3_4">那是因为我加了overflow</div>
+    </fieldset>
+    <fieldset>
+        <div class="example4_1">
+            <div class="example4_2"></div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="example4_3">
+            <div class="example4_4"></div>
+        </div>
+        <p>父子元素，子元素加margin-top会将父元素也会影响父元素位置即使父元素没加margin-top，父父元素加overflow除了visible的值都可,也可加pading-top:0.1px解决</p>
+    </fieldset>
+    <script>
+        var a = !function () {
+            var b = 1;
+            function c() {
+                b++
+                console.log(b)
+            }
+            function d() {
+                b++
+                console.log(b)
+            }
+            return {
+                c: c(),
+                d: d()
+            }
+        }.call()
+        a.c
+        a.d
+
+    </script>
+</body>
+
+</html>

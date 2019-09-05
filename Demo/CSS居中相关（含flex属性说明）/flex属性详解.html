@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>flex常用属性详解</title>
+    <style>
+        .box {
+            width: 50px;
+            height: 50px;
+            border: 1px solid red;
+        }
+
+        .father {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .father1 {
+            display: flex;
+            flex-direction: row-reverse;
+        }
+
+        .father2 {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .father3 {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .father,
+        .father1,
+        .father2,
+        .father3 {
+            margin-top: 25px;
+        }
+
+        .father4 {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+        }
+
+        .father5 {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .father6 {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap-reverse;
+        }
+
+        .father7 {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .father8 {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .father9 {
+            display: flex;
+            justify-content: center;
+        }
+
+        .father10 {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .father11 {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .father7,
+        .father8,
+        .father9,
+        .father10,
+        .father11 {
+            margin-top: 25px;
+        }
+
+        .father12 {
+            display: flex;
+            align-items: stretch;
+            height: 200px;
+            border: 1px solid black;
+        }
+
+        .father13 {
+            display: flex;
+            align-items: flex-start;
+            height: 200px;
+            border: 1px solid black;
+        }
+
+        .father14 {
+            display: flex;
+            align-items: flex-end;
+            height: 200px;
+            border: 1px solid black;
+        }
+
+        .father15 {
+            display: flex;
+            align-items: center;
+            height: 200px;
+            border: 1px solid black;
+        }
+
+        .father16 {
+            display: flex;
+            align-items: baseline;
+            height: 200px;
+            border: 1px solid black;
+        }
+
+        .box1 {
+            background: gray;
+            border: 1px solid red;
+        }
+
+        .father12,
+        .father13,
+        .father14,
+        .father15,
+        .father16 {
+            margin-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <legend>flex-direction: row | row-reverse | column | column-reverse;设置排列方式</legend>
+        <div class="father">
+            <div class="box">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+        </div>
+        <div class="father1">
+            <div class="box">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+        </div>
+        <div class="father2">
+            <div class="box">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+        </div>
+        <div class="father3">
+            <div class="box">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>flex-wrap: nowrap;不换行</legend>
+        <div class="father4">
+            <div class="box">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+            <div class="box">4</div>
+            <div class="box">5</div>
+            <div class="box">6</div>
+            <div class="box">7</div>
+            <div class="box">8</div>
+            <div class="box">9</div>
+            <div class="box">10</div>
+            <div class="box">11</div>
+            <div class="box">12</div>
+            <div class="box">13</div>
+            <div class="box">14</div>
+            <div class="box">15</div>
+            <div class="box">16</div>
+            <div class="box">17</div>
+            <div class="box">18</div>
+            <div class="box">19</div>
+            <div class="box">20</div>
+            <div class="box">21</div>
+            <div class="box">22</div>
+            <div class="box">23</div>
+            <div class="box">24</div>
+            <div class="box">25</div>
+            <div class="box">26</div>
+            <div class="box">27</div>
+            <div class="box">28</div>
+            <div class="box">29</div>
+            <div class="box">30</div>
+            <div class="box">31</div>
+            <div class="box">32</div>
+            <div class="box">33</div>
+            <div class="box">34</div>
+            <div class="box">35</div>
+            <div class="box">36</div>
+            <div class="box">37</div>
+            <div class="box">38</div>
+            <div class="box">39</div>
+            <div class="box">40</div>
+
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>flex-wrap: wrap-reverse;换行到下面</legend>
+        <div class="father5">
+            <div class="box">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+            <div class="box">4</div>
+            <div class="box">5</div>
+            <div class="box">6</div>
+            <div class="box">7</div>
+            <div class="box">8</div>
+            <div class="box">9</div>
+            <div class="box">10</div>
+            <div class="box">11</div>
+            <div class="box">12</div>
+            <div class="box">13</div>
+            <div class="box">14</div>
+            <div class="box">15</div>
+            <div class="box">16</div>
+            <div class="box">17</div>
+            <div class="box">18</div>
+            <div class="box">19</div>
+            <div class="box">20</div>
+            <div class="box">21</div>
+            <div class="box">22</div>
+            <div class="box">23</div>
+            <div class="box">24</div>
+            <div class="box">25</div>
+            <div class="box">26</div>
+            <div class="box">27</div>
+            <div class="box">28</div>
+            <div class="box">29</div>
+            <div class="box">30</div>
+            <div class="box">31</div>
+            <div class="box">32</div>
+            <div class="box">33</div>
+            <div class="box">34</div>
+            <div class="box">35</div>
+            <div class="box">36</div>
+            <div class="box">37</div>
+            <div class="box">38</div>
+            <div class="box">39</div>
+            <div class="box">40</div>
+
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>flex-wrap: wrap-reverse;换行到上面</legend>
+        <div class="father6">
+            <div class="box">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+            <div class="box">4</div>
+            <div class="box">5</div>
+            <div class="box">6</div>
+            <div class="box">7</div>
+            <div class="box">8</div>
+            <div class="box">9</div>
+            <div class="box">10</div>
+            <div class="box">11</div>
+            <div class="box">12</div>
+            <div class="box">13</div>
+            <div class="box">14</div>
+            <div class="box">15</div>
+            <div class="box">16</div>
+            <div class="box">17</div>
+            <div class="box">18</div>
+            <div class="box">19</div>
+            <div class="box">20</div>
+            <div class="box">21</div>
+            <div class="box">22</div>
+            <div class="box">23</div>
+            <div class="box">24</div>
+            <div class="box">25</div>
+            <div class="box">26</div>
+            <div class="box">27</div>
+            <div class="box">28</div>
+            <div class="box">29</div>
+            <div class="box">30</div>
+            <div class="box">31</div>
+            <div class="box">32</div>
+            <div class="box">33</div>
+            <div class="box">34</div>
+            <div class="box">35</div>
+            <div class="box">36</div>
+            <div class="box">37</div>
+            <div class="box">38</div>
+            <div class="box">39</div>
+            <div class="box">40</div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>【5种水平对齐方式】左对齐，右对齐，水平居中，两端对齐，每个项目两侧的间隔相等</legend>
+        <div class="father7">
+            <div class="box">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+        </div>
+        <div class="father8">
+            <div class="box">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+        </div>
+        <div class="father9">
+            <div class="box">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+        </div>
+        <div class="father10">
+            <div class="box">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+        </div>
+        <div class="father11">
+            <div class="box">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>垂直居中align-items: stretch | flex-start | flex-end | center | baseline;</legend>
+        <div class="father12">
+            <div class="box1">123123</div>
+            <div class="box1">123123</div>
+            <div class="box1">123123</div>
+        </div>
+        <div class="father13">
+            <div class="box1">123123</div>
+            <div class="box1">123123</div>
+            <div class="box1">123123</div>
+        </div>
+        <div class="father14">
+            <div class="box1">123123</div>
+            <div class="box1">123123</div>
+            <div class="box1">123123</div>
+        </div>
+        <div class="father15">
+            <div class="box1">123123</div>
+            <div class="box1">123123</div>
+            <div class="box1">123123</div>
+        </div>
+        <div class="father16">
+            <div class="box1">123123</div>
+            <div class="box1">123123</div>
+            <div class="box1">123123</div>
+        </div>
+    </fieldset>
+</body>
+
+</html>

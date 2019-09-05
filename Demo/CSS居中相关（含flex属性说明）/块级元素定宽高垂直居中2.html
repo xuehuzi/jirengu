@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>块级元素定宽高垂直居中2</title>
+    <style>
+        .box {
+            border: 1px solid black;
+            width: 300px;
+            height: 300px;
+            /*  */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">定宽高水平垂直居中
+        <br>position: absolute;
+        <br>top: 0;
+        <br>left: 0;
+        <br>right: 0;
+        <br>bottom: 0;
+        <br>margin: auto;
+        <br>兼容性也很好，缺点是需要知道子元素的宽高
+    </div>
+
+</body>
+
+</html>

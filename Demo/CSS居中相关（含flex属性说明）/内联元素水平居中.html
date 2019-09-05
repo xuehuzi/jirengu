@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>水平居中</title>
+    <style>
+        div{
+            margin-top: 50px;
+        }
+        .div1 {
+            border: 1px solid red;
+            margin: 0 auto;
+            width: 300px;
+        }
+
+        .div2 {
+            text-align: center;
+            border: 1px solid red;
+        }
+
+        .div3 {
+            text-align: center;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <legend>水平居中</legend>
+        <div class="div1">
+            <span>水平居中定宽的块级应元素，元素自身加margin: 0 auto;</span>
+        </div>
+        <div class="div2">
+            <span>内联元素水平居中，在父元素加text-align: center</span>
+        </div>
+        <div class="div3">
+            <img src="https://www.baidu.com/img/bd_logo1.png" alt="">
+            <div>
+                <button>mybtn</button>
+            </div>
+        </div>
+        <p>行内元素水平居中，如文本、图片、按钮等行内元素，可通过给父元素设置 text-align:center 来实现；另如果块状元素属性display 被设置为inline时，也是可以使用这种方法。但有个首要条件是子元素必须没有被float影响</p>
+    </fieldset>
+</body>
+
+</html>
