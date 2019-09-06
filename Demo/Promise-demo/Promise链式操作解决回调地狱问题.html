@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promise 链式操作解决回调地狱问题</title>
+</head>
+<body>
+<script>
+    let src1 = 'http://pub.idqqimg.com/lib/qqface/15.gif';
+    let src2 = 'http://pub.idqqimg.com/lib/qqface/10.gif';
+    let src3 = 'http://pub.idqqimg.com/lib/qqface/25.gif';
+    !function(){
+        let image = new Image();
+        let image2 = new Image();
+        let image3 = new Image();
+        image.onload = function () {
+            console.log('1加载完毕');
+            image2.onload = function () {
+                console.log('2加载完毕');
+                image3.onload = function () {
+                    console.log('3加载完毕');
+                };
+                image3.src = src3
+            };
+            image2.src = src2
+        };
+        image.src = src1;
+
+        //回调地狱，阅读困难
+    }.call();
+
+
+
+    function loadImg(src) {
+        let img = new Image();
+        img.src = src;
+        return new Promise((resolve, reject) => {
+            img.onload = () => {
+                resolve();
+                document.body.appendChild(img)
+            };
+            img.onerror = (e) => {
+                reject(e)
+            }
+        })
+    }
+
+    loadImg(src1).then(
+        () => {
+            console.log('图1');
+            loadImg(src2)
+        }
+    ).then(
+        () => {
+            console.log('图2');
+            loadImg(src3)
+        }
+    ).then(
+        () => {
+            console.log('图3');
+            console.log('图1，2，3全部加载完成');
+        }
+    );
+    //一个链式调用，按顺序加载图片；通过两种方式（回调和promise）对比，promise好理解很多，代码阅读起来也容易
+</script>
+</body>
+</html>

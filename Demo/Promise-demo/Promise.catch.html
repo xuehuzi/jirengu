@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promise.catch</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+<script>
+    function new_Promise() {
+        return new Promise(function (resolve, reject) {
+            var num = Math.floor((Math.random() * 10) + 1);
+            setTimeout(function () {
+                if (num >= 5) {
+                    resolve(num);
+                } else {
+                    reject('数字太小了');
+                }
+            }, 100);
+        });
+
+    }
+
+    new_Promise()
+        .then(
+            (resolve) => {
+                console.log(resolve);
+                console.log(test); //此处的test未定义，执行到此处会报错。
+            },
+            (reject) => {
+                console.log(reject);
+                console.log(testa); //此处的testa未定义，执行到此处会报错。
+            }
+        );
+
+    ///////////////////////////////////////////////////////
+    function catch_Promise() {
+        return new Promise(function (resolve, reject) {
+            let numb = Math.floor((Math.random() * 10) + 1);
+            setTimeout(function () {
+                if (numb >= 5) {
+                    resolve(numb);
+                } else {
+                    reject('数字太小了');
+                }
+            }, 100);
+        });
+
+    }
+    catch_Promise()
+        .then(
+            (resolve) => {
+                console.log(resolve);
+                console.log(test); //此处的test未定义，执行到此处会报错。
+
+            },
+            (reject) => {
+                console.log(reject);
+                console.log(testa); //此处的testa未定义，执行到此处会报错。
+            }
+        ).catch(
+        (msg) => {
+            //此处的msg接收的就是，then执行第一个参数时抛出的异常信息
+            console.log(msg);
+            console.log('如果没有catch我就不会显示');
+        }
+    )
+
+</script>
+</body>
+
+</html>

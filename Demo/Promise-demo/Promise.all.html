@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promise.all</title>
+</head>
+<body>
+<script>
+    function new_Promise(src) {
+        return new Promise(function (resolve, reject) {
+            let img = document.createElement('img');//img = new Image();
+            img.src = src;
+            img.onload = () => {
+                resolve(img)
+                //将img对象传递到then方法
+            };
+            img.onerror = () => {
+                reject('加载失败')
+            }
+        })
+    }
+
+    Promise.all([ // 所有图片加载完后执行
+        new_Promise('http://pub.idqqimg.com/lib/qqface/15.gif'),
+        new_Promise('http://pub.idqqimg.com/lib/qqface/16.gif'),
+        new_Promise('http://pub.idqqimg.com/lib/qqface/17.gif')
+    ]).then
+    (
+        //load_img(resolve)
+        (resolve) => {
+            console.log(resolve instanceof Array);//Promise.all返回一个数组,数组有三个img对象
+            resolve.forEach(
+                (e) => {
+                    console.log(e);
+                    document.body.appendChild(e)
+                });
+        }
+    ).catch(
+        (msg)=>{
+            console.log(msg)
+        }
+    )
+    /*
+    * new_Promise函数return一个promise对象
+    * promise对象,new一个img对象（可理解为创建了一个img标签）
+    * Promise.all方法用于将多个Promise实例，包装成一个新的Promise实例，可以理解为并行执行异步操作的能力，且在所有异步操作执行完后才执行回调
+    * Promise.all([])返回的是一个数组，数组有三个img对象。本例子分别执行了三次new_Promise()函数每次src不同
+    * 当三张图片都加载完成后，才会执行后面的then方法【Promise.all([]).then()】
+    * Promise.all([])里面任何一张图片加载失败，都会抛出错判
+    * */
+</script>
+</body>
+</html>

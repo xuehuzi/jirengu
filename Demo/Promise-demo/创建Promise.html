@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>创建promise</title>
+</head>
+<body>
+<script>
+    let promise = new Promise((resolve, reject) => {
+        let numb = Math.floor((Math.random() * 10) + 1);
+        setTimeout(() => {
+            if (numb >= 5) {
+                resolve('成功')
+            } else {
+                reject('失败')
+            }
+        }, 100)
+    });
+    promise.then(
+        (resolve) => {
+            console.log(resolve)
+        },
+        (reject) => {
+            console.log(reject)
+        }
+    );
+    //通过new Promise构造函数创建
+
+    function promise2(parameter) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(() => {
+                if (parameter >= 5) {
+                    resolve('成功')
+                } else {
+                    reject('失败')
+                }
+            }, 100)
+        })
+    }
+    promise2(Math.floor((Math.random() * 10) + 1)).then(
+        (resolve) => {
+            console.log(resolve)
+        },
+        (reject) => {
+            console.log(reject)
+        }
+    )
+    //通过函数并return一个Promise对象
+
+</script>
+</body>
+</html>

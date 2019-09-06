@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promise图片加载请求示例</title>
+</head>
+<body>
+<script>
+    function load_img(src) {
+        return new Promise(function (resolve, reject) {
+            let image = document.createElement('img');
+            image.src = src;
+            //上面两行使用图片，是根据图片会发请求的特性。
+            image.onload = function () {
+                resolve(image);//图片请求成功，image就是图片的地址
+            };
+            image.onerror = function () {
+                reject('图片加载失败');//图片请求失败
+            }
+        })
+    }
+
+    load_img('http://pub.idqqimg.com/lib/qqface/15.gif').then(//改下图片地址即执行reject
+        (resolve) => {
+            document.body.appendChild(resolve);
+            console.log(resolve)
+        },
+        (reject) => {
+            let p = document.createElement('p');
+            p.innerText = reject;
+            document.body.appendChild(p)
+        }
+    );
+    /*
+    * 示例说明
+    * load_img函数return了一个promise对象，load_img函数做了这几件事
+    * 1、创建一个img标签，根据img标签会发请求特性
+    * 2、图片请求成功返回resolve()
+    * 3、图片请求失败返回reject()
+    * promise的then方法接受两个函数为参数（resolve，reject）
+    * 这两个函数分别对应请求成功和请求失败的回调
+    * */
+
+</script>
+</body>
+</html>

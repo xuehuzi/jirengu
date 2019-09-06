@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Promise.race</title>
+</head>
+<body>
+<script>
+    function runAsync1() {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                console.log('异步任务1执行完成');
+                resolve('随便什么数据1');
+            }, 1000);
+        });
+    }
+
+    function runAsync2() {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                console.log('异步任务2执行完成');
+                resolve('随便什么数据2');
+            }, 3000);
+        });
+    }
+
+    function runAsync3() {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                console.log('异步任务3执行完成');
+                resolve('随便什么数据3');
+            }, 5000);
+        });
+    }
+
+    Promise.race([runAsync1(), runAsync2(), runAsync3()])
+        .then(
+            (resolve) => {
+                console.log(resolve);
+            });
+
+    //////////////////////////////////////////////////////////////
+    function race_Promise(src) {
+
+        return new Promise((resolve, reject) => {
+            let img = new Image();
+            img.src = src;
+            img.onload = () => {
+                resolve(img)
+            };
+            img.onerror = () => {
+                reject('图片都挂了')
+            }
+        })
+    }
+
+    Promise.race([
+        race_Promise('http://pub.idqqimg.com/lib/qqface/15.gif'),
+        race_Promise('http://pub.idqqimg.com/lib/qqface/16.gif'),
+        race_Promise('http://pub.idqqimg.com/lib/qqface/17.gif')
+    ]).then
+    (
+        (resolve) => {
+            console.log(resolve);
+            console.log(resolve instanceof Array);
+            document.body.appendChild(resolve)
+        }
+    ).catch(
+        (reject) => {
+            console.log(reject)
+        }
+    )
+    /*
+      race和all方法类似，同样是将多个 Promise 实例，包装成一个新的 Promise 实例，都是接受一个数组
+    * Promise.all可理解为都要执行回调，不论里面有1个还是100个；
+    * Promise.race可理解为，谁跑得快就给谁先执行回调，跑得慢的也会继续执行回调(看第一个例子)。
+    * Promise.all返回给then的数据是一个数组
+    * Promise.race返回给then的数据不是数组
+    * */
+</script>
+</body>
+</html>
