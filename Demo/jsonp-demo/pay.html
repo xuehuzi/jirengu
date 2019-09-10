@@ -10,33 +10,46 @@
 </head>
 
 <body>
-    <h5>您的账户余额是<span id="amount">&&&amount&&&</span></h5>
-    <button id="button">打钱</button>
+<h5>您的账户余额是<span id="amount">&&&amount&&&</span></h5>
+<button id="button">打钱</button>
 </body>
 <script>
     button.addEventListener('click', function (e) {
         let script = document.createElement('script');
-        let name = 'function_name' + parseInt(Math.random() * 100000, 10);//每次随机产生函数名
-        window[name] = function (callback_parameter) {//判断服务器返回状态是成功还是失败
+        let name = 'function_name' + parseInt(Math.random() * 100000, 10);
+        //每次随机产生函数名
+
+        script.src = './pay?callback=' + name;//设置请求地址
+        //script.src = 'http://one.com:8001/pay?callback=' + name;//JSONP可以跨域请求
+        document.body.appendChild(script);
+
+        window[name] = function (callback_parameter) {
             console.log(callback_parameter);
             if (callback_parameter === 'success') {
                 amount.innerText = amount.innerText - 1;
             } else {
                 alert('打钱失败');
             }
-        }
-        //script.src = 'http://one.com:8001/pay?callback=' + name;
-        script.src = './pay?callback=' + name;
-        document.body.appendChild(script);
-        //debugger
+        };
+        //debugger;
         script.onload = function (e) {
             e.currentTarget.remove();
             delete window[name];
-        }
+        };
         script.onerror = function (e) {
             e.currentTarget.remove();
             delete window[name];
         }
+        /*
+        * 》》》难点说明
+        * window[name]等于window.name，此处这样写是因为name是未知的所以用[]语法，name每次通过随机数生成
+        * window[name]，可以理解为向window对象加了一个属性，这个属性对应了一个函数，window[name]就是这个函数的名字
+        * 》》》流程说明
+        * 创建一个script标签，src包含了请求地址和发给服务器的回调函数名（name）
+        * 服务器会在收到请求时拿到浏览器发给他的name，通过发给服务器请求的script.src地址拿到
+        * 服务器拿到name执行后，再把这个name返回给浏览器，浏览器根据收到的（success或fail）来操作页面数据增减
+        * 浏览器拿到服务器返回信息并执行对应操作后，删除新增的script标签和window[name]，这个name是随机数产生，每次请求都不同
+        * */
     })
 </script>
 <script src="./main.js"></script>
