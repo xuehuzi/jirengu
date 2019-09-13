@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数防抖和节流</title>
+</head>
+
+<body>
+    <button id="mybtn">1111111111</button>
+    <button id="mybtn2">222222222</button>
+    <button id="mybtn3">333333333</button>
+    <script>
+        function fn() {
+            console.log(123)
+         }
+        let cd = false;
+        mybtn.onclick = () => {
+            if (!cd) {
+                fn();
+                cd = true;
+                let timer = setTimeout(() => {
+                    cd=false;
+                }, 5000)
+            }
+        }
+        mybtn2.onclick = ()=>{
+            fn();
+        }
+        /*
+        *******函数节流
+        *mybtn加了节流，设置了临时变量cd，mybtn点击时加了一个定时器，定时器每隔10秒触发一次，等待时间内点击不会重复操作
+        *mybtn2没加节流，每次点击都会调用fn，每次点击按钮都会执行操作
+        */
+        let timer = null;
+        mybtn3.onclick = ()=>{
+            console.log('你点了3按钮，请等待5秒，我要和其他兄弟一起来')
+            if(timer){
+                clearTimeout(timer)
+            }
+            timer = setTimeout(()=>{
+                console.log('兄弟们到达战场')
+                timer = null;
+            },5000)
+        }
+        /*
+        ******函数防抖
+        *每次事件触发前，先检查之前是否有定时器已经在运行
+        *如果在运行，则清空，重新开始计时
+        */
+    </script>
+</body>
+
+</html>

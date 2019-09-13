@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组去重</title>
+</head>
+<body>
+<script>
+
+
+    var array = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, undefined, null, null, NaN, NaN, 'NaN', 0, 0, 'a', 'a', {}, {}];
+    var arry1 = [NaN, NaN];
+
+    function unique(array) {//for循环嵌套
+        var new_arry = [];
+        for (var i = 0; i < array.length; i++) {
+            for (var j = 0; j < new_arry.length; j++) {
+                if (array[i] === new_arry[j]) {
+                    break;
+                }
+            }
+            // 如果array[i]是唯一的，那么执行完循环，j等于new_arry.length
+            if (j === new_arry.length) {
+                new_arry.push(array[i])
+            }
+        }
+        return new_arry;
+    }
+
+    console.log(unique(array)); // [1, "1"]
+    /*
+    *>>>>实现思路
+    * 在这个方法中，我们使用循环嵌套，最外层循环 array，里面循环 new_arry
+    *如果 array[i] 的值跟 new_arry[j] 的值相等，就跳出循环，如果都不等
+    *说明元素是唯一的，这时候 j 的值就会等于 new_arry 的长度，根据这个特点进行判断，将值添加进 new_arry
+    */
+
+    function unique1(array) {//indexOf方法简化内循环方式
+        var new_arry = [];
+        for (var i = 0; i < array.length; i++) {
+            if (new_arry.indexOf(array[i]) === -1) {
+                new_arry.push(array[i])
+            }
+        }
+        return new_arry;
+    }
+
+    console.log(unique1(array));
+
+    /*
+    * >>>>实现思路
+    * indexOf方法，可返回指定的值在字符串（数组）中首次出现的位置，未找到返回-1
+    * 循环原数组
+    * 判断新数组是否存在当前元素，如果有相同的值则跳过，不相同则push进数组
+    *
+    * */
+    function unique2(arr) {//ES6新语法
+        return Array.from(new Set(arr))
+    }
+
+    console.log(unique2(array));
+
+
+    function unique3(array) {//利用计数排序，对比当前值与上一个值是否相等，效率较高此方法,但是会改变数组顺序只能是正整数
+        var new_arry = [];
+        var sortArray = array.sort();
+        for (var i = 0; i < sortArray.length; i++) {
+            // 如果是第一个元素或者相邻的元素不相同
+            if (sortArray[i] !== sortArray[i - 1]) {
+                new_arry.push(sortArray[i])
+            }
+        }
+        return new_arry;
+    }
+
+    console.log(unique3(array));
+
+    /*
+    * >>>>实现思路
+    * 先用sort()方法对原数组排序生成新数组
+    * 利用计数排序当前值与上一个值对比是否相等
+    * 不想当说明没重复，则push到新数组
+    * */
+    function unique4(array) {//hash方法
+        var hash = {};
+        var temp = [];
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] in hash) {
+            } else {
+                hash[array[i]] = true;
+                temp.push(array[i]);
+            }
+        }
+        return temp
+    }
+
+    console.log(unique4(array))
+    /*
+    * >>>>实现思路
+    * 利用一个空的 Object 对象，把数组的值存成 Object 的key值 (利用Object的key唯一特性)
+    * 比如 Object.key1和Object.key2两个是相同的（注意是key不是value），则说明在数组内，这两个值是重复的
+    * */
+
+</script>
+</body>
+</html>

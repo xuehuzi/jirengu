@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>async/await</title>
+</head>
+<body>
+<script>
+    function new_promise(guess) {
+        console.log('开始摇');
+        return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    let numb = Math.floor((Math.random() * 10) + 1);
+                    if (guess === '大' && numb >= 5 || guess === '小' && numb < 5) {
+                        resolve(numb)
+                    } else {
+                        reject(numb);
+                    }
+                }, 500)
+            }
+        )
+    }
+
+    Promise.all([////Promise.all同时请求多个（以摇色子为例）
+        new_promise('大'),
+        new_promise('大')
+    ]).then(
+        (resolve) => {
+            resolve.forEach((e) => {
+                console.log(e)
+                console.log('Promisse获胜：2个筛子都是大')
+            })
+        },
+        (reject) => {
+            console.log('Promisse输了：2个筛子不是同大小')
+        }
+    );
+
+    async function new_async1() {
+        try {
+            let n = await Promise.all([new_promise('大'), new_promise('大')]);//多个异步时也可以await后面接Promise.all
+            n.forEach((e) => {
+                console.log(e)
+                console.log('async获胜：2个筛子都是大')
+            })
+        } catch (e) {
+            console.log('async输了：2个筛子不是同大小')
+        }
+    }
+
+    new_async1();
+
+
+    /*
+    * >>>知识点
+    * await 只能放在以async为前缀的函数内“ async function new_async() ”
+    * await 后面要跟一个会return Promise的函数“ let n = await new_promise() ”
+    * async和await写法，看起来将异步流程写的更像同步
+    *
+    * let async_promise = new_async();console.log(async_promise)
+    * 可以看出async函数返回的就是一个Promise对象
+    *
+    * 可以这样理解async和await就是Promise的语法糖，async函数返回的就是一个Promise （）
+    *
+    *
+    * */
+
+    function my_promise(time) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                let random = Math.random()
+                if (random >= 0.1) {
+                    resolve(time)
+                } else {
+                    throw new Error('出错了')
+                }
+            }, time)
+        })
+    }
+
+    my_promise(500)
+        .then((response) => {
+            console.log('第一次请求成功了', response);
+            return my_promise(response + 1500)
+        })
+        .then((result) => {
+            console.log('第二次请求成功了', result);
+            return my_promise(result + 2500)
+        })
+        .then(result => {
+            console.log('第三次请求成功了', result)
+        });
+
+
+    async function test() {
+        let result01 = await my_promise(500);
+        let result02 = await my_promise(result01 + 1500);
+        let result03 = await my_promise(result02 + 2500);
+        console.log(result03)
+    }
+
+    test()
+</script>
+</body>
+</html>

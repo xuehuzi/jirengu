@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>立即执行函数</title>
+    <style>
+        li {
+            display: inline-block;
+            list-style: none;
+            height: 50px;
+            width: 100px;
+            background: gray;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li class="myli">1</li>
+        <li class="myli">2</li>
+        <li class="myli">3</li>
+        <li class="myli">4</li>
+        <li class="myli">5</li>
+    </ul>
+    <script>
+        var myli = document.querySelectorAll('.myli');
+        // for (var i = 0; i < myli.length; i++) {
+        //     myli[i].onclick = function () {
+        //         console.log(i)
+        //     }
+        // }
+        //依次输出是5，5，5，5，5，这是因为for循环执行完之后才执行onclick，此时i已经变成5
+        // i 是贯穿整个作用域的，而不是给每个 myli[i] 分配了一个 i
+
+
+
+        // for (let i = 0; i < myli.length; i++) {
+        //     myli[i].onclick = function () {
+        //         console.log(i)
+        //     }
+        // }
+        //将for循环内的var改为let，依次输出是0,1,2,3,4
+        //ES6新语法，let的作用域是块级，可以保证每次传给myli[i]是变化后的i，而不是最后for循环执行完的i
+
+        for (var i = 0; i < myli.length; i++) {
+            !function (new_i) {
+                myli[new_i].onclick = function () {
+                    console.log(new_i) // 0、1、2、3、4、5
+                }
+            }(i)
+        }
+        //用立即执行函数给每个 li 创造一个独立作用域即
+        //立即执行函数执行的时候，i 的值再被赋值给new_i
+
+
+    </script>
+</body>
+
+</html>

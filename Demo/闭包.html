@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>闭包</title>
+</head>
+
+<body>
+<script>
+    function foo() {
+        var local = 1;
+
+        function bar() {
+            local++;
+            console.log(local);
+            return local
+        }
+
+        return bar
+    }
+
+    var fn = foo();//等于 foo().call()
+    foo().call();
+    fn();
+
+    /*
+    * >为什么要函数套函数呢？
+    * 需要局部变量，才把 local 放在一个函数里，如果不把 local 放在函数里，local 就是一个全局变量，达不到使用闭包的目的[隐藏变量]
+    * >为什么要 return bar ？
+    * return bar 只是为了 bar函数能被使用（不return bar的话里面返回的东西就拿不到），跟闭包无关
+    *
+    * */
+    let obj = (function () {
+        let lives = 50;
+
+        function add(numb) {
+            lives += numb;
+            console.log(lives)
+        }
+
+        function del(numb) {
+            lives -= numb;
+            console.log(lives)
+        }
+
+        return {
+            add: add,
+            del: del
+        }
+    })();
+    obj.add(1);
+    obj.del(1);
+</script>
+</body>
+
+</html>

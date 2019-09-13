@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this指向</title>
+</head>
+
+<body>
+<script>
+    function fn() {
+        console.log(this)
+    }
+
+    var obj = {
+        foo: function () {
+            console.log(this)
+        }
+    };
+    var bar = obj.foo;
+    obj.foo();      // 打指向obj
+    bar();        // 指向window
+    bar.call();      // 指向window
+    bar.call(obj);   // 指向obj
+    fn.apply();        // 指向window
+    fn.apply(obj);     // 指向obj
+    //箭头函数里面看到 this ，就当作是它外面的函数的 this
+    //当遇到this指向问题时，切记this就是call的第一个参数，将函数调用形式转化成call形式，this指向问题即可解决
+
+
+    function fn1() {
+        console.log(this)
+    }
+
+    function fn2() {
+        console.log(this)
+    }
+
+    var arr = [fn1, fn2]
+    arr[0]() // 这里面的 this 指向arry
+
+</script>
+</body>
+
+</html>
