@@ -7,15 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="//at.alicdn.com/t/font_1191386_1d4khruylrx.js"></script>
     <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.14.1/dist/av-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.1.1/Tween.min.js"></script>
+    <script src="./script/writ_code_.animation.js"></script>
     <link rel="stylesheet" href="./style/resume_style.css">
-    <title>简历练习</title>
+    <title>简历</title>
     <style id="styleid"></style>
 </head>
 
 <body>
 <div id="loading_animation" class="loading_animation">
     <div id="set_loading"></div>
-    <pre id="code" class="code"></pre>
+    <pre id="code" class="code code_display"></pre>
 </div>
 <div id="bdy" class="bdy">
     <div id="top_nav" class="top_nav">
@@ -194,7 +196,6 @@
         </form>
     </section>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.1.1/Tween.min.js"></script>
 <script>
 
     function animate(time) {
@@ -203,30 +204,6 @@
     }
 
     requestAnimationFrame(animate);
-
-
-    setTimeout(function () {
-        set_loading.classList.remove('loading');//加载动画
-        let signs_2 = document.querySelectorAll('[data_x]');
-        for (let i = 0; i < signs_2.length; i++) {
-            signs_2[i].classList.remove('offsittop');
-        }
-        test();
-    }, 2000);
-
-
-    function remove() {
-        setTimeout(function () {
-            set_loading.classList.remove('loading');//加载动画
-            loading_animation.style.display = 'none';
-            bdy.style.display = 'block';
-            let signs_2 = document.querySelectorAll('[data_x]');
-            for (let i = 0; i < signs_2.length; i++) {
-                signs_2[i].classList.remove('offsittop');
-            }
-            test();
-        }, 2000);
-    }
 
     let str = `
         /*
@@ -291,202 +268,11 @@
         *
         */
         `;
-
-
-    function writ_code(target_node, target_code, fn) {
-        let flg = 0;
-        let timer = setInterval(() => {
-            flg += 1;
-            target_node.innerHTML = target_code.substring(0, flg);
-            target_node.innerHTML = target_node.innerHTML.replace('#code', '<span style="color:red">code</span>');
-            styleid.innerHTML = target_code.substring(0, flg);
-            loading_animation.scrollTop = loading_animation.scrollHeight
-            if (flg >= str.length) {
-                clearInterval(timer);
-                fn && fn.call();
-            }
-        }, 10);
-    }
-
-
-    writ_code(code, str, () => {
-        set_loading.classList.add('loading');
-        remove();
-    });
-
-    ////滚动到对应模块时的动效
-    function test() {
-        let signs = document.querySelectorAll('[data_x]');//选择所有包含data_x标记的标签
-        let sign_index = 0;//设置默认从第几位开始
-        for (let i = 1; i < signs.length; i++) {//求出几个目标元素，哪一个距离当前滚动距离最近
-            if (Math.abs(signs[i].offsetTop - window.scrollY) < Math.abs(signs[sign_index].offsetTop - window.scrollY)) {
-                sign_index = i;
-            }
-        }
-        let current_id = signs[sign_index].id;//获取当前距离top最近元素的id【注意变量位置，放的地方不同执行结果有差异】
-        let a = document.querySelector('a[href="#' + current_id + '"]');
-        let li = a.parentNode;
-        let select_son = li.parentNode.children;
-        //选择所有li标签（说明：先选取li的父元素，再选择li父元素所有的子元素，此时选取的子元素也包括li自己）
-        for (let i = 0; i < select_son.length; i++) {//先清除所有，已有下划线的状态,然后给距离最近的那个元素加上样式
-            select_son[i].classList.remove('active')
-        }
-        li.classList.add('active');
-
-        let skill_bar = document.getElementsByClassName('skill_bar');
-        for (let i = 0; i < skill_bar.length; i++) {
-            if (sign_index === 1) {
-                skill_bar[i].classList.add('skill_bar11')
-            }
-        }
-
-        ////浏览到对应模块时给nav列表对应的标签加选中下划线
-        /*
-        * 选出标签（通过给对应的标签加data_x来标记）
-        * 遍历当前正在聚焦浏览的标签
-        * 遍历取消所有nav的下划线类
-        * 给当前浏览（距离最近）的那个元素加上样式
-        */
-        signs[sign_index].classList.add('offsittop');
-    }
-
-    ////nav根据滚动条是否滚动（scrollY）显示的动画
-    window.onscroll = function () {
-        //console.log(window.scrollY);
-        if (window.scrollY > 0) {
-            top_nav.classList.add('top_nav_bg');
-        } else {
-            top_nav.classList.remove('top_nav_bg');
-        }
-        test();
-    };
-
-    ////nav列表鼠标移入移出事件
-    let li_tags = document.querySelectorAll('.top_nav_inner > nav > ul> li');
-    for (let i = 0; i < li_tags.length; i++) {//nav关于技能等子菜单显示关闭
-        li_tags[i].onmouseenter = function (tag) {//添加li鼠标事件（放上）
-            //console.log(li_tags[i])
-            tag.currentTarget.classList.add('nav_list_show');
-        };
-        li_tags[i].onmouseleave = function (tag) {//添加li鼠标事件（离开）
-            tag.currentTarget.classList.remove('nav_list_show');
-        }
-    }
-
-    ////nav列表点击后对应模块缓动事件
-    let a_tags = document.querySelectorAll('.top_nav_inner > nav > ul> li >a');//
-    for (let i = 0; i < a_tags.length; i++) {
-        a_tags[i].onclick = function (tag) {
-            tag.preventDefault();//阻止a标签默认的跳转
-            let a_href = tag.currentTarget.getAttribute('href');
-            //getAttribute获取到a标签的href是原本输入的，直接通过href获取的地址会经过浏览器转义
-            let Jump_target = document.querySelector(a_href);
-            let Jump_top = Jump_target.offsetTop;
-
-            /*
-                        //原生无缓冲动画
-                        let move_numbers = 25;
-                        let d = 500 / move_numbers;
-                        let move_flg = 0;
-                        let currentTop = window.scrollY;//垂直方向已滚动的距离
-                        let targetTop = Jump_top - 100;
-                        let speed = (targetTop - currentTop) / move_numbers;//每次需要移动的距离
-                        let move_timer = setInterval(function () {
-                            if (move_flg === move_numbers) {//达到移动次数清除定时器
-                                clearInterval(move_timer);
-                                return
-                            }
-                            move_flg = move_flg + 1;
-                            //console.log(speed)
-                            window.scrollTo(0, currentTop + speed * move_flg);
-                        }, d);
-
-                        //tween第三方动画库
-                        */
-            let currentTop = window.scrollY;
-            let targetTop = Jump_top - 100;
-            //console.log(targetTop - currentTop);
-            let s = targetTop - currentTop; // 路程
-            let coords = {y: currentTop}; // 起始位置
-            let t = Math.abs((s / 100) * 300); // 时间
-            if (t > 500) {
-                t = 500
-            }
-            var tween = new TWEEN.Tween(coords) // 起始位置
-                .to({y: targetTop}, t) // 结束位置 和 时间
-                .easing(TWEEN.Easing.Cubic.InOut) // 缓动类型
-                .onUpdate(function () {
-                    // coords.y 已经变了
-                    window.scrollTo(0, coords.y) // 如何更新界面
-                })
-                .start(); // 开始缓动
-        }
-    }
-
-    works_bar1.onclick = function () {
-        works_bar_inner.className = 'works_bar_inner'
-    };
-    works_bar2.onclick = function () {
-        works_bar_inner.className = 'works_bar_inner2'
-    };
-    works_bar3.onclick = function () {
-        works_bar_inner.className = 'works_bar_inner3'
-    }
-
-    //7.31留言功能
-    var APP_ID = 'URfkqxY5iOa3IVFJ8WohECzS-gzGzoHsz';
-    var APP_KEY = '8G8oDsxnDJ4TTDTA4AapbOLO';
-    AV.init({
-        appId: APP_ID,
-        appKey: APP_KEY
-    });
-
-
-    var query = new AV.Query('leave_msg');
-    query.find().then(
-        function (todos) {
-            let history_msg = todos.map((tgas) => tgas.attributes);
-            //console.log(history_msg)
-            history_msg.forEach((todo) => {
-                let li = document.createElement('li');
-                li.innerText = `${todo.name}: ${todo.msgvalue}`;
-                msg_list.appendChild(li)
-                //todo.set('isComplete', true);//这句没搞懂，不屏蔽只取到第一条
-            });
-            // 批量更新
-            AV.Object.saveAll(todos);
-        });
-
-
-    let postmesg = document.querySelector('#postmesg')
-    postmesg.onsubmit = function (e) {
-        e.preventDefault();
-        let namevalue = postmesg.querySelector('input[name = name]').value;
-        let msgvalue = postmesg.querySelector('input[name = content]').value;
-        let leave_Msg = AV.Object.extend('leave_msg');//创建表
-        let leave_msg = new leave_Msg();//在表中创建数据
-        if (namevalue && msgvalue !== '') {
-            leave_msg.save({
-                'name': namevalue,
-                'msgvalue': msgvalue
-            }).then(function (obj) {
-                let li = document.createElement('li');
-                li.innerText = `${obj.attributes.name}: ${obj.attributes.msgvalue}`;
-                msg_list.appendChild(li);
-                postmesg.querySelector('input[name = content]').value = '';
-                postmesg.querySelector('input[name = name]').value = '';
-                //console.log('存入OK')
-                //console.log(obj)
-            })
-        } else {
-            alert('请输入内容')
-        }
-
-
-    }
 </script>
-
+<script src="./script/loading_animation.js"></script>
+<script src="./script/about_work.js"></script>
+<script src="./script/scroll_animation.js"></script>
+<script src="./script/navs_animation.js"></script>
+<script src="./script/postmesg.js"></script>
 </body>
-
-
 </html>

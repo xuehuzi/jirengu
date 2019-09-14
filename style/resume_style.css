@@ -39,11 +39,15 @@ li {
     overflow: auto;
 }
 
-.code{
+.code {
     margin-top: 25px;
     position: absolute;
     margin-bottom: 25px;
+    display: none;
+}
 
+.code_display {
+    display: block;
 }
 
 .loading {
@@ -51,7 +55,7 @@ li {
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 150px;
+    bottom: 50%;
 }
 
 .loading::before,
