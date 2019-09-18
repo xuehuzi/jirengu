@@ -1,2 +1,3 @@
 import _ from 'lodash';
-import './music.js';//意思是导入first.js
+import './css/index.css';
+import './js/music.js';

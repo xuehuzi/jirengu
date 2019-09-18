@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.player {
+    height: 100vh;
+    background: #060a3d;
+    overflow: hidden;
+}
+
+.header {
+    text-align: center;
+    color: white;
+    height: 110px;
+}
+
+.header > h1 {
+    font-size: 20px;
+    padding-top: 20px;
+}
+
+.header > p {
+    color: #868aaf;
+    font-size: 12px;
+}
+
+.header > .spots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.header > .spots > :first-child {
+    width: 8px;
+    height: 8px;
+    background: #db3baa;
+    border-radius: 50%;
+}
+
+.header > .spots > :last-child {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #6a134f;
+    margin: 0 8px;
+}
+
+.main {
+    height: calc(100vh - 270px);
+    display: flex;
+    width: 200vw;
+}
+
+.main > .svg-list {
+
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.main > .svg-list > .svg-main {
+    height: 40vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.svg-1, .svg-2, .svg-3 {
+    position: absolute;
+}
+
+.svg-main > .svg-1 {
+    background: url("../svg/effect-no-move.svg") no-repeat;
+    height: 70vw;
+    width: 70vw;
+}
+
+.svg-main > .svg-2 {
+    background: url("../svg/effect-move1.svg") no-repeat;
+    width: 60vw;
+    height: 60vw;
+}
+
+.svg-main > .svg-3 {
+    background: url("../svg/effect-move2.svg") no-repeat;
+    width: 24vw;
+    height: 24vw;
+}
+
+.lyric {
+    width: 100vw;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+}
+
+.lyric p {
+    margin-top: 8px;
+}
+
+.lyric > :last-child {
+    color: #868aaf;
+}
+
+.footer {
+    height: 160px;
+}
+
+.control_one {
+    display: flex;
+    justify-content: center;
+}
+
+.control_one > svg {
+    height: 24px;
+    width: 24px;
+    margin: 0 20px;
+}
