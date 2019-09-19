@@ -121,3 +121,55 @@
     width: 24px;
     margin: 0 20px;
 }
+
+.control_two {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin-top: 20px;
+}
+
+.control_two > .star_time, .end_time {
+    width: 40px;
+    color: #868aaf;
+    font-size: 12px;
+    text-align: center;
+}
+
+.control_two > .star_time {
+    order: 1;
+}
+
+.control_two > .bar {
+    order: 2;
+    height: 4px;
+    flex: 1;
+    background: #0025f1;
+    position: relative;
+    margin: 0 10px;
+}
+
+.control_two > .end_time {
+    order: 3;
+}
+
+.bar > .speed {
+    transition: all .2s;
+    height: 100%;
+    width: 0;
+    border-radius: 2px;
+    background: #db3baa;
+}
+
+.bar>.speed::after{
+    content: '';
+    position: absolute;
+    top: -7px;
+    right: -8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: url("../svg/progress.svg") no-repeat;
+}
+
