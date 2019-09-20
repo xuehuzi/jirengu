@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="src/css/index.css">
+    <title>music-player</title>
+</head>
+<body>
+<div id="player" class="player">
+    <header class="header">
+        <h1>假装</h1>
+        <p>陆雪凝-陆拾</p>
+        <div class="spots">
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+    <div class="main">
+        <div class="svg-list">
+            <div class="svg-main">
+                <div class="svg-1"></div>
+                <div class="svg-2"></div>
+                <div class="svg-3"></div>
+            </div>
+            <div class="lyric">
+                <P>第一行歌词</P>
+                <P>我是第二行</P>
+            </div>
+        </div>
+        <div class="svg-lyrics">
+            <div>1231231231231</div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="control_one">
+            <svg class="like">
+                <use xlink:href="#like"></use>
+            </svg>
+            <svg class="download">
+                <use xlink:href="#download"></use>
+            </svg>
+            <svg class="share">
+                <use xlink:href="#share"></use>
+            </svg>
+            <svg class="comment">
+                <use xlink:href="#comment"></use>
+            </svg>
+        </div>
+        <div class="control_two">
+            <span class="star_time">00:00</span>
+            <span class="end_time">05:25</span>
+            <div class="bar">
+                <div class="speed"></div>
+            </div>
+        </div>
+        <div class="control_three">
+            <svg class="icon-order">
+                <use xlink:href="#icon-order"></use>
+            </svg>
+            <svg class="icon-pre">
+                <use xlink:href="#icon-pre"></use>
+            </svg>
+            <svg class="icon-play pause">
+                <use xlink:href="#icon-play"></use>
+            </svg>
+            <svg class="icon-next">
+                <use xlink:href="#icon-next"></use>
+            </svg>
+
+            <svg class="icon-list">
+                <use xlink:href="#icon-list"></use>
+            </svg>
+        </div>
+    </footer>
+</div>
+<script src="./src/js/svg_file.js"></script>
+<script src="./src/js/music.js"></script>
+</body>
+</html>
