@@ -3,6 +3,12 @@
     padding: 0;
 }
 
+.svg_file{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
 .player {
     height: 100vh;
     background: #060a3d;
@@ -162,7 +168,7 @@
     background: #db3baa;
 }
 
-.bar>.speed::after{
+.bar > .speed::after {
     content: '';
     position: absolute;
     top: -7px;
@@ -173,3 +179,20 @@
     background: url("../svg/progress.svg") no-repeat;
 }
 
+.footer > .control_three {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+.control_three > .icon-order, .icon-pre, .icon-next, .icon-list {
+    width: 28px;
+    height: 28px;
+}
+
+.control_three > .icon-play {
+    width: 50px;
+    height: 50px;
+}

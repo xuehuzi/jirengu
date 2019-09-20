@@ -1,3 +1,3 @@
 (function () {
-    console.log(3333)
-}())
+    console.log(3333);
+}());
