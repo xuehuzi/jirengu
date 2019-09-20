@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-.svg_file{
+.svg_file {
     position: absolute;
     left: 0;
     top: 0;
@@ -57,15 +57,24 @@
     height: calc(100vh - 270px);
     display: flex;
     width: 200vw;
+    transform: translateX(0);
+    /*transform: translateX(-100vw);*/
 }
 
 .main > .svg-list {
-
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.main > .svg-lyrics {
+    width: 100vw;
+    height: calc(100% - 40px);
+    text-align: center;
+    overflow: hidden;
+    color: white;
 }
 
 .main > .svg-list > .svg-main {
@@ -84,18 +93,30 @@
     background: url("../svg/effect-no-move.svg") no-repeat;
     height: 70vw;
     width: 70vw;
+    animation: rotate_animation 20s linear infinite;
 }
 
 .svg-main > .svg-2 {
     background: url("../svg/effect-move1.svg") no-repeat;
     width: 60vw;
     height: 60vw;
+    animation: rotate_animation 10s linear infinite reverse;
 }
 
 .svg-main > .svg-3 {
     background: url("../svg/effect-move2.svg") no-repeat;
     width: 24vw;
     height: 24vw;
+    animation: rotate_animation 10s linear infinite;
+}
+
+@keyframes rotate_animation {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(1turn);
+    }
 }
 
 .lyric {
