@@ -57,8 +57,16 @@
     height: calc(100vh - 270px);
     display: flex;
     width: 200vw;
+    overflow: hidden;
+    transition: transform .3s;
+}
+
+.main_1 {
     transform: translateX(0);
-    /*transform: translateX(-100vw);*/
+}
+
+.main_2 {
+    transform: translateX(-100vw);
 }
 
 .main > .svg-list {
