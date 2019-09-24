@@ -38,14 +38,14 @@
     margin-top: 20px;
 }
 
-.header > .spots > :first-child {
+.header > .spots > .spots_selection {
     width: 8px;
     height: 8px;
     background: #db3baa;
     border-radius: 50%;
 }
 
-.header > .spots > :last-child {
+.header > .spots > span {
     width: 5px;
     height: 5px;
     border-radius: 50%;
@@ -83,6 +83,21 @@
     text-align: center;
     overflow: hidden;
     color: white;
+}
+
+.svg_lyrics_main {
+    transition: all 0.4s;
+    transform: translateY(0);
+}
+
+.svg_lyrics_main >p{
+    color: #868aaf;
+    line-height: 2;
+    font-size: 14px;
+}
+
+.svg_lyrics_main > .lyrics_flg {
+    color: #fff;
 }
 
 .main > .svg-list > .svg-main {
@@ -195,6 +210,8 @@
     width: 0;
     border-radius: 2px;
     background: #db3baa;
+    position: relative;
+    /*进度原理：根据音乐进度speed宽度随着增加，宽度增加会撑着speed::after随之往后*/
 }
 
 .bar > .speed::after {
