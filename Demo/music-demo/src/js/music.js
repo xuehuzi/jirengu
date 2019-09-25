@@ -8,11 +8,12 @@ class player {
         this.music_index = 0;
         this.page_index = 0;
         this.start();
-        this.audio = new Audio();//可理解为DOM内的<audio id="audio"></audio>，这样写省去DOM内加东西,因浏览器会禁用自动播放，所以需要给播放按钮加事件
+        this.audio = new Audio();
+        //可理解为DOM内的<audio id="audio"></audio>，这样写省去DOM内加东西,因浏览器会禁用自动播放，所以需要给播放按钮加事件
         this.bind();
         /**/
         this.lyricsArr = [];
-        this.lyricIndex = -1;//存歌词当前到第几行
+        this.lyricIndex = 0;//存歌词当前到第几行
         /**/
     }
 
@@ -26,9 +27,7 @@ class player {
             )
             .then(
                 (data) => {
-                    //console.log(data);
                     this.music_list = data;//获取音乐，将音乐放到music_list
-                    //this.audio.src = this.music_list[this.music_index].url;
                     this.rendering_music();
                 }
             )
@@ -37,7 +36,6 @@ class player {
     bind() {
         let that = this;
         this.$('.icon-play').onclick = function () {
-            //console.log(that.audio);
             if (this.classList.contains('playing')) {
                 that.audio.pause();
                 this.classList.remove('playing');
@@ -106,6 +104,7 @@ class player {
         this.audio.src = this.music_list[this.music_index].url;
         this.audio.oncanplaythrough = () => {
             //this.start_play();
+            this.reset_play_state();
             this.audio.play();
         }
     }
@@ -115,6 +114,7 @@ class player {
         this.audio.src = this.music_list[this.music_index].url;
         this.audio.oncanplaythrough = () => {
             //this.start_play();
+            this.reset_play_state();
             this.audio.play();
         }
     }
@@ -162,7 +162,6 @@ class player {
             )
             .then(
                 (data) => {
-                    //console.log(data.lrc.lyric);
                     /**/
                     this.setLyrics(data.lrc.lyric);
                     window.lyrics = data.lrc.lyric;
@@ -171,6 +170,12 @@ class player {
             )
     }
 
+    reset_play_state() {//重置播放按钮状态，解决点击上一首下一首按钮后播放按钮状态没变问题
+        let play_state = this.$('.icon-play');
+        play_state.classList.remove('pause');
+        play_state.classList.add('playing');
+        play_state.querySelector('use').setAttribute('xlink:href', '#icon-pause');
+    }
 
     /**/
     setLyrics(lyrics) {//歌词拆分
@@ -207,19 +212,17 @@ class player {
     }
 
     locateLyric() {//定位播放界面歌词（根据播放时间定位到具体的DOM元素）
-        let currentTime = this.audio.currentTime * 1000;
-        let nextLineTime = this.lyricsArr[this.lyricIndex + 1][0];
-        if (currentTime > nextLineTime && this.lyricIndex < this.lyricsArr.length - 1) {
-            this.lyricIndex++;
-            let node = this.$('[data-time="' + this.lyricsArr[this.lyricIndex][0] + '"]');
-            if (node) this.setLyricToCenter(node);
-            this.$$('.svg-list .lyric p')[0].innerText = this.lyricsArr[this.lyricIndex][1];
-            this.$$('.svg-list .lyric p')[1].innerText = this.lyricsArr[this.lyricIndex + 1] ? this.lyricsArr[this.lyricIndex + 1][1] : '';
-            console.log(this.$$('.svg-list .lyric p')[1].innerText)
-            if(this.$$('.svg-list .lyric p')[1].innerText === ''){
-                console.log('over')
+        if (this.lyricIndex < this.lyricsArr.length - 1) {
+            //更改了原判断顺序，之前歌曲结束this.lyricsArr[this.lyricIndex + 1][0]会报错
+            let currentTime = this.audio.currentTime * 1000;
+            let nextLineTime = this.lyricsArr[this.lyricIndex + 1][0];
+            if (currentTime > nextLineTime) {
+                this.lyricIndex++;
+                let node = this.$('[data-time="' + this.lyricsArr[this.lyricIndex][0] + '"]');
+                if (node) this.setLyricToCenter(node);
+                this.$$('.svg-list .lyric p')[0].innerText = this.lyricsArr[this.lyricIndex][1];
+                this.$$('.svg-list .lyric p')[1].innerText = this.lyricsArr[this.lyricIndex + 1] ? this.lyricsArr[this.lyricIndex + 1][1] : '';
             }
-
         }
     }
 
@@ -240,16 +243,14 @@ class player {
 
 
     formateTime(secondsTotal) {
-        let minutes = parseInt(secondsTotal/60);
+        let minutes = parseInt(secondsTotal / 60);
         minutes = minutes >= 10 ? '' + minutes : '0' + minutes;
-        let seconds = parseInt(secondsTotal%60);
+        let seconds = parseInt(secondsTotal % 60);
         seconds = seconds >= 10 ? '' + seconds : '0' + seconds;
         return minutes + ':' + seconds
     }
 
     /**/
-
-
     /*
     *    start_play() {
     *    this.audio.oncanplaythrough = () => this.audio.play()
@@ -262,8 +263,10 @@ class player {
 new player('#player');
 //window.player = new player();
 /*
-* BUG
-* >未点播放按钮，点上一首下一首会自动播放
-* >播放界面的第二行歌词，歌曲播放完毕后没有最后一行了会报错
+* BUG&功能
+* >点上一首下一首播放按钮状态显示不正确   :OK
+* >播放界面的第二行歌词，歌曲播放完毕后没有最后一行了会报错    :OK
 * >点击上一首下一首，应先清空之前歌词
+* >点击上一首下一首，应先清空之前播放进度条
+* >增加临时音乐列表
 * */
