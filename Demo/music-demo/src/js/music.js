@@ -15,7 +15,7 @@ class player {
         this.lyricsArr = [];
         this.lyricIndex = 0;//存歌词当前到第几行
         /**/
-        this.loop_state = false;
+        this.temporary_musiclist = [];
     }
 
     start() {
@@ -84,6 +84,13 @@ class player {
             )
         };
         this.$('.icon-list').onclick = function (e) {
+            for (let i = 0; i < that.temporary_musiclist.length; i++) {
+                let test = document.querySelector('.control_four>div');
+                let p = document.createElement('p');
+                p.innerText = that.temporary_musiclist[i]
+                test.appendChild(p)
+            }
+            ///////////////////////////////
             e.stopPropagation()
             let mode = document.querySelector('.control_four');
             if (this.classList.contains('control_four_close')) {
@@ -177,7 +184,8 @@ class player {
         };
         /**/
         this.loading_lyric();
-        console.log(music_obj.title)
+        //console.log(music_obj.title)
+        this.temporary_list(music_obj);
     }
 
     set_spots(class_name) {//当前页面选中原点的状态
@@ -220,6 +228,26 @@ class player {
         play_state.classList.remove('pause');
         play_state.classList.add('playing');
         play_state.querySelector('use').setAttribute('xlink:href', '#icon-pause');
+    }
+
+    temporary_list(push_target) {
+        let flg = 0;
+        if (this.temporary_musiclist.length === 0) {
+            this.temporary_musiclist.push(push_target.title)
+        } else {
+            this.temporary_musiclist.forEach(
+                (index) => {
+                    if (index !== push_target.title) {
+                        flg++;
+                    }
+                }
+            );
+            if (flg === this.temporary_musiclist.length) {
+                this.temporary_musiclist.push(push_target.title)
+            }
+        }
+        console.log(this.temporary_musiclist)
+
     }
 
     /**/

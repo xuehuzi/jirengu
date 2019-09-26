@@ -12,6 +12,7 @@
 .player {
     height: 100vh;
     background: #060a3d;
+    /*background: url("../svg/bg.jpg");*/
     overflow: hidden;
 }
 
@@ -163,7 +164,8 @@
 
 .control_one {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 0 20px;
 }
 
 .control_one > svg {
@@ -230,7 +232,7 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
-    padding: 0 20px;
+    padding: 0 40px;
 }
 
 .footer > .control_four {
@@ -247,7 +249,9 @@
     bottom: -50%;
     width: 100%;
     height: 50%;
-    background: white;
+    background: #f8f8f8;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
 .footer > .control_four_close {
