@@ -15,6 +15,7 @@ class player {
         this.lyricsArr = [];
         this.lyricIndex = 0;//存歌词当前到第几行
         /**/
+        this.loop_state = false;
     }
 
     start() {
@@ -35,7 +36,17 @@ class player {
 
     bind() {
         let that = this;
-        this.$('.icon-play').onclick = function () {
+        this.audio.onended = function () {//列表循环&单曲循环
+            let mode = document.querySelector('.icon-order');
+            if (mode.classList.contains('single_loop')) {
+                that.rendering_music();
+                that.audio.play();
+            } else {
+                that.rendering_music();
+                that.pre_song();
+            }
+        };
+        this.$('.icon-play').onclick = function () {//播放or暂停
             if (this.classList.contains('playing')) {
                 that.audio.pause();
                 this.classList.remove('playing');
@@ -50,10 +61,46 @@ class player {
             }
         };
         /*
-        * >>>播放按钮功能
-        * let that = this;需要绑定到当前点击的播放按钮
-        * 下来根据播放按钮状态展示暂停还是播放中（DOM操作，修改SVG的类名）
-        * */
+         * >>>播放按钮功能
+         * let that = this;需要绑定到当前点击的播放按钮
+         * 下来根据播放按钮状态展示暂停还是播放中（DOM操作，修改SVG的类名）
+         * */
+        this.$('.icon-order').onclick = function () {//列表or单曲循环图标状态
+            this.classList.forEach(
+                (index) => {
+                    if (index === 'single_loop') {
+                        //循环单曲
+                        this.classList.remove('single_loop');
+                        this.classList.add('list_loop');
+                        this.querySelector('use').setAttribute('xlink:href', '#icon-loop')
+                    } else if (index === 'list_loop') {
+                        //列表列表
+                        this.classList.remove('list_loop');
+                        this.classList.add('single_loop');
+                        this.querySelector('use').setAttribute('xlink:href', '#icon-order')
+
+                    }
+                }
+            )
+        };
+        this.$('.icon-list').onclick = function (e) {
+            e.stopPropagation()
+            let mode = document.querySelector('.control_four');
+            if (this.classList.contains('control_four_close')) {
+                mode.classList.remove('control_four_open');
+                mode.classList.add('control_four_close');
+            } else {
+                mode.classList.remove('control_four_close');
+                mode.classList.add('control_four_open');
+            }
+        };
+        document.onclick = function () {
+            let mode = document.querySelector('.control_four');
+            if (mode.classList.contains('control_four_open')) {
+                mode.classList.remove('control_four_open');
+                mode.classList.add('control_four_close');
+            }
+        };
         this.$('.icon-pre').onclick = function () {//上一曲
             that.pre_song();
             that.rendering_music();
@@ -95,8 +142,7 @@ class player {
                     cd = false;
                 }, 500)
             }
-        };
-        //
+        }
     }
 
     pre_song() {
@@ -131,7 +177,7 @@ class player {
         };
         /**/
         this.loading_lyric();
-
+        console.log(music_obj.title)
     }
 
     set_spots(class_name) {//当前页面选中原点的状态
@@ -150,7 +196,6 @@ class player {
                 } else if (index === 'main_2') {
                     this.page_index = 1;
                 }
-
             }
         )
     }
@@ -234,13 +279,11 @@ class player {
         node.classList.add('lyrics_flg')
     }
 
-
     setProgerssBar() {
         let percent = (this.audio.currentTime * 100 / this.audio.duration) + '%';
         this.$('.bar .speed').style.width = percent;
         this.$('.star_time').innerText = this.formateTime(this.audio.currentTime);
     }
-
 
     formateTime(secondsTotal) {
         let minutes = parseInt(secondsTotal / 60);

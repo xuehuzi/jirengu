@@ -90,7 +90,7 @@
     transform: translateY(0);
 }
 
-.svg_lyrics_main >p{
+.svg_lyrics_main > p {
     color: #868aaf;
     line-height: 2;
     font-size: 14px;
@@ -231,6 +231,31 @@
     align-items: center;
     margin-top: 20px;
     padding: 0 20px;
+}
+
+.footer > .control_four {
+    height: 100vh;
+    width: 100vw;
+    background: black;
+    position: absolute;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.footer > .control_four > div {
+    position: relative;
+    bottom: -50%;
+    width: 100%;
+    height: 50%;
+    background: white;
+}
+
+.footer > .control_four_close {
+    display: none;
+}
+
+.footer > .control_four_open {
+    display: block;
 }
 
 .control_three > .icon-order, .icon-pre, .icon-next, .icon-list {
