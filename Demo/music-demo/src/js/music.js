@@ -16,10 +16,20 @@ class player {
         this.lyricIndex = 0;//存歌词当前到第几行
         /**/
         this.temporary_musiclist = [];
+        this.current_plyer_name = null;//保存当前播放歌曲名称
     }
 
     start() {
         fetch('https://jirengu.github.io/data-mock/huawei-music/music-list.json')
+            // .then(
+            //     response => {
+            //         if (response.ok) {
+            //             return response => response.json()
+            //         } else {
+            //             return Promise.reject('网络错误!')
+            //         }
+            //     }
+            // )
             .then(
                 res => res.json()
                 // (res) => {
@@ -32,10 +42,13 @@ class player {
                     this.rendering_music();
                 }
             )
+            // .catch(error => console.log('网络错误', error));
     }
 
     bind() {
         let that = this;
+        let control_four = document.querySelector('.control_four');
+        let play_list = document.querySelector('.play_list');
         this.audio.onended = function () {//列表循环&单曲循环
             let mode = document.querySelector('.icon-order');
             if (mode.classList.contains('single_loop')) {
@@ -78,35 +91,41 @@ class player {
                         this.classList.remove('list_loop');
                         this.classList.add('single_loop');
                         this.querySelector('use').setAttribute('xlink:href', '#icon-order')
-
                     }
                 }
             )
         };
         this.$('.icon-list').onclick = function (e) {
+            e.stopPropagation();
+            let ul = document.createElement('ul');
+            play_list.appendChild(ul);
             for (let i = 0; i < that.temporary_musiclist.length; i++) {
-                let test = document.querySelector('.control_four>div');
-                let p = document.createElement('p');
-                p.innerText = that.temporary_musiclist[i]
-                test.appendChild(p)
+                let li = document.createElement('li');
+                ul.appendChild(li);
+                li.innerText = that.temporary_musiclist[i];
+                if(that.current_plyer_name === that.temporary_musiclist[i] ){
+                    li.classList.add('li_active');
+                }
             }
             ///////////////////////////////
-            e.stopPropagation()
-            let mode = document.querySelector('.control_four');
             if (this.classList.contains('control_four_close')) {
-                mode.classList.remove('control_four_open');
-                mode.classList.add('control_four_close');
+                control_four.classList.remove('control_four_open');
+                control_four.classList.add('control_four_close');
             } else {
-                mode.classList.remove('control_four_close');
-                mode.classList.add('control_four_open');
+                control_four.classList.remove('control_four_close');
+                control_four.classList.add('control_four_open');
             }
         };
         document.onclick = function () {
-            let mode = document.querySelector('.control_four');
-            if (mode.classList.contains('control_four_open')) {
-                mode.classList.remove('control_four_open');
-                mode.classList.add('control_four_close');
+            if (control_four.classList.contains('control_four_open')) {
+                control_four.classList.remove('control_four_open');
+                control_four.classList.add('control_four_close');
+                play_list.removeChild(play_list.children[0])
+                //console.log(mode.children[0].children[0].nodeName)
             }
+        };
+        this.$('.control_four>div').onclick = function (e) {
+            e.stopPropagation()
         };
         this.$('.icon-pre').onclick = function () {//上一曲
             that.pre_song();
@@ -184,8 +203,8 @@ class player {
         };
         /**/
         this.loading_lyric();
-        //console.log(music_obj.title)
         this.temporary_list(music_obj);
+        this.current_plyer_name = music_obj.title;
     }
 
     set_spots(class_name) {//当前页面选中原点的状态
@@ -246,8 +265,7 @@ class player {
                 this.temporary_musiclist.push(push_target.title)
             }
         }
-        console.log(this.temporary_musiclist)
-
+        //console.log(this.temporary_musiclist)
     }
 
     /**/

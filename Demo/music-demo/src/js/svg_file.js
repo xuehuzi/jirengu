@@ -56,7 +56,7 @@ div.innerHTML = `
         </symbol>
     </svg>
     <svg width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <symbol id="icon-order" width="120px" height="120px" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <symbol id="icon-order" viewBox="0 0 120 120"  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
             <title>循环模式</title>
             <desc>Created with Sketch.</desc>
@@ -107,7 +107,7 @@ div.innerHTML = `
                 </g>
             </g>
         </symbol>
-        <symbol id="icon-pre" width="120px" height="120px" viewBox="0 0 500 500">
+        <symbol id="icon-pre" viewBox="0 0 120 120" >
             <defs>
                 <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="50%" gradientTransform="translate(0.500000,0.500000),scale(1.000000,0.994186),translate(-0.500000,-0.500000)" id="radialGradient-1">
                     <stop stop-color="#AC2D73" offset="0%"></stop>
@@ -156,7 +156,7 @@ div.innerHTML = `
                 </g>
             </g>
         </symbol>
-        <symbol id="icon-play" width="120px" height="120px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <symbol id="icon-play" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
             <title>图-资源 14</title>
             <desc>Created with Sketch.</desc>
@@ -213,7 +213,7 @@ div.innerHTML = `
                 </g>
             </g>
         </symbol>
-        <symbol id="icon-pause" width="120px" height="120px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <symbol id="icon-pause" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
     <title>图-资源 14 copy</title>
     <desc>Created with Sketch.</desc>
@@ -273,7 +273,7 @@ div.innerHTML = `
         </g>
     </g>
 </symbol>
-        <symbol id="icon-next" width="120px" height="120px" viewBox="0 0 500 500">
+        <symbol id="icon-next" viewBox="0 0 120 120" >
             <defs>
                 <radialGradient cx="50%" cy="50%" fx="50%" fy="50%" r="50%" gradientTransform="translate(0.500000,0.500000),scale(1.000000,0.994186),translate(-0.500000,-0.500000)" id="radialGradient-1">
                     <stop stop-color="#AC2D73" offset="0%"></stop>
@@ -320,7 +320,7 @@ div.innerHTML = `
                 </g>
             </g>
         </symbol>
-        <symbol id="icon-list" width="120px" height="120px" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <symbol id="icon-list" viewBox="0 0 120 120"  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
             <title>音乐</title>
             <desc>Created with Sketch.</desc>
@@ -371,7 +371,7 @@ div.innerHTML = `
                 </g>
             </g>
         </symbol>         
-        <symbol id="icon-loop" width="120px" height="120px" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <symbol id="icon-loop" viewBox="0 0 120 120"  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
              <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
              <title>循环模式</title>
             <desc>Created with Sketch.</desc>

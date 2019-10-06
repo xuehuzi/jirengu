@@ -254,6 +254,19 @@
     border-top-right-radius: 15px;
 }
 
+.control_four > .play_list > ul  {
+    padding: 20px;
+}
+
+.control_four > .play_list > ul > li {
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+.li_active{
+    color: red;
+}
+
 .footer > .control_four_close {
     display: none;
 }
