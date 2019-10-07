@@ -55,8 +55,8 @@ class player {
                 that.rendering_music();
                 that.audio.play();
             } else {
+                that.next_song();
                 that.rendering_music();
-                that.pre_song();
             }
         };
         this.$('.icon-play').onclick = function () {//播放or暂停
@@ -130,10 +130,12 @@ class player {
         this.$('.icon-pre').onclick = function () {//上一曲
             that.pre_song();
             that.rendering_music();
+            that.clear()
         };
         this.$('.icon-next').onclick = function () {//下一曲
             that.next_song();
             that.rendering_music();
+            that.clear()
         };
         /**/
         this.audio.ontimeupdate = function () {
@@ -268,6 +270,18 @@ class player {
         //console.log(this.temporary_musiclist)
     }
 
+    clear(){
+        /*10.6*/
+        let clear_speed = this.$('.control_two>.bar>.speed');
+        let clear_lyric = this.$$('.main>.svg-list>.lyric>p');
+        clear_speed.style.width = 0;
+        clear_lyric.forEach(
+            (item,index)=>{
+                item.innerText = ''
+            }
+        )
+        /*10.6*/
+    }
     /**/
     setLyrics(lyrics) {//歌词拆分
         this.lyricIndex = 0;
