@@ -219,6 +219,9 @@
 
       for (let i = 0; i < brush.length; i++) {//设置笔触颜色
          brush[i].onclick = function () {
+            for (let i = 0; i < brush.length; i++) {
+               brush[i].classList.remove('active')
+            }
             change_color = brush_color[i].id;
             eraser_flg = false;
             my_canvas.style.cursor = "url('./img/eraser_ico.ico'),auto";//画笔
