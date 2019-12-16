@@ -180,18 +180,18 @@
       var coordinate = {
          'x': undefined,
          'y': undefined
-      }
+      };
       var pen_width = [
          { thickness: 5 },
          { thickness: 10 },
          { thickness: 15 }
-      ]
+      ];
 
       var pen_flg = undefined;
 
       window.onresize = function () {//设置canvas画布尺寸随窗口可视尺寸变化
          setcanvas()
-      }
+      };
 
       setcanvas();
 
@@ -233,16 +233,20 @@
       function draw(x, y, radius) {//设置笔触
          my_graphics.beginPath();
          my_graphics.arc(x, y, radius, 0, Math.PI * 2);
-         my_graphics.fillStyle = change_color//填充颜色
+         my_graphics.fillStyle = change_color;//填充颜色
          my_graphics.fill();
       }
 
       function draw_line(x1, y1, x2, y2) {//设置连线
+         //
+         my_graphics.lineCap = "round";
+         my_graphics.lineJoin = "round";
+         //
          my_graphics.beginPath();
          my_graphics.lineWidth = pen_flg;//连接线宽度
          my_graphics.moveTo(x1, y1);//连线起点坐标
          my_graphics.lineTo(x2, y2);//连线终点坐标
-         my_graphics.strokeStyle = change_color//连线颜色
+         my_graphics.strokeStyle = change_color;//连线颜色
          my_graphics.closePath();
          my_graphics.stroke();
       }
