@@ -20,7 +20,7 @@ class player {
     }
 
     start() {
-        fetch('https://jirengu.github.io/data-mock/huawei-music/music-list.json')
+        fetch('https://youngfever.gitee.io/data-mock/huawei-music/music-list.json')
             // .then(
             //     response => {
             //         if (response.ok) {
